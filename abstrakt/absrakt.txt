@@ -1,1 +1,0 @@
-Autonomiczny system pomiaru drgań budynków oparty na akcelerometrach MEMS
