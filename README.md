@@ -9,7 +9,7 @@ pozwalającego na pomiar i analizę drgań budynków zgodną z normą PN-B
 platformie Raspberry Pi® oraz wykorzystujący akcelerometry typu MEMS w
 celu minimalizacji kosztów i rozmiarów stacji. Oprogramowanie
 kontrolujące akwizycję oraz analizę danych napisano przy użyciu języka
-Python i odpowniednich bibliotek. Skonstruowanie oraz uruchomienie
+Python i odpowiednich bibliotek. Skonstruowanie oraz uruchomienie
 zaprogramowanego układu ma bezpośrednio przyczynić się do realizacji
 większego projektu obejmującego połączenie takich jednostek
 analizujący drgania na większym obszarze.
