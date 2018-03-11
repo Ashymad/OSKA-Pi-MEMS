@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from mma8451 import accel
 import datetime
 import time
