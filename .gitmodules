@@ -1,0 +1,3 @@
+[submodule "mma8451"]
+	path = mma8451
+	url = https://github.com/rotypo/mma8451
