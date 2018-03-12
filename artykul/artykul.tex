@@ -19,6 +19,9 @@
 \usepackage{mathtools}
 \usepackage{setspace}
 
+\usepackage[style=numeric, sorting=none, backend=biber, language=autobib, autolang=other,]{biblatex}
+\addbibresource{bibliografia.bib}
+
 \begin{document}
 
     \onehalfspacing
@@ -50,18 +53,52 @@
 
         \noindent
         \textbf{Abstrakt} \\
-        Współczesne rozwiązania dedykowane do pomiarów drgań budynków proponowane przez popularnych producentów sprzętu pomiarowego charakteryzują się dużym stopniem skomplikowania. Celem niniejszego projektu było zbudowanie prostego i przystępnego cenowo systemu pozwalającego na pomiar i analizę drgań budynków zgodną z normą PN-B 02170:2016-12. Postanowiono stworzyć system pomiarowy oparty na platformie Raspberry Pi® oraz wykorzystujący akcelerometry typu MEMS w celu minimalizacji kosztów i rozmiarów stacji. Oprogramowanie kontrolujące akwizycję oraz analizę danych napisano przy użyciu języka Python i odpowiednich bibliotek. Skonstruowanie oraz uruchomienie zaprogramowanego układu ma bezpośrednio przyczynić się do realizacji większego projektu obejmującego połączenie takich jednostek analizujący drgania na większym obszarze.
+        Współczesne rozwiązania dedykowane do pomiarów drgań budynków
+        proponowane przez popularnych producentów sprzętu pomiarowego
+        charakteryzują się dużym stopniem skomplikowania. Celem niniejszego
+        projektu było zbudowanie prostego i przystępnego cenowo systemu
+        pozwalającego na pomiar i analizę drgań budynków zgodną z normą PN-B
+        02170:2016-12. Postanowiono stworzyć system pomiarowy oparty na
+        platformie Raspberry Pi® oraz wykorzystujący akcelerometry typu MEMS w
+        celu minimalizacji kosztów i rozmiarów stacji. Oprogramowanie
+        kontrolujące akwizycję oraz analizę danych napisano przy użyciu języka
+        Python i odpowiednich bibliotek. Skonstruowanie oraz uruchomienie
+        zaprogramowanego układu ma bezpośrednio przyczynić się do realizacji
+        większego projektu obejmującego połączenie takich jednostek analizujący
+        drgania na większym obszarze.
         \vspace*{24pt}
 
 
     \section{Wstęp}
 
-    Pomiary drgań są ważnym elementem oceny wibroakustycznej w technice. Jednym z wielu pól na których można je stosować jest badanie wpływu wibracji podłoża na budynki. Źródła drgań oddziałujące na obiekty budowlane są zróżnicowane, ale najczęściej pochodzą od wszelkich środków transportu eksploatowanych w bezpośredniej bliskości zabudowy. W miastach wzmożona komunikacja samochodowa, ruch tramwajowy, a nawet metro, potrafią powodować występowanie drgań o dużych amplitudach przyspieszeń. Z kolei konstrukcje budynków poddawane długotrwałej ekspozycji na drgania mogą ulegać uszkodzeniom, a w skrajnych przypadkach zniszczeniu. Dodatkowo na terenach miejskich często można spotkać budynki wymagające dużego ograniczenia wpływu drgań za względu na pełnione funkcje. Różnego rodzaju laboratoria, szpitale czy przemysł precyzyjny nie dopuszczają występowania drgań o amplitudach uniemożliwiających pełnienie danej funkcji przez mieszczący je budynek.
+    Pomiary drgań są ważnym elementem oceny wibroakustycznej w technice. Jednym
+    z wielu pól na których można je stosować jest badanie wpływu wibracji
+    podłoża na budynki. Źródła drgań oddziałujące na obiekty budowlane są
+    zróżnicowane, ale najczęściej pochodzą od wszelkich środków transportu
+    eksploatowanych w bezpośredniej bliskości zabudowy. W miastach wzmożona
+    komunikacja samochodowa, ruch tramwajowy, a nawet metro, potrafią powodować
+    występowanie drgań o dużych amplitudach przyspieszeń. Z kolei konstrukcje
+    budynków poddawane długotrwałej ekspozycji na drgania mogą ulegać
+    uszkodzeniom, a w skrajnych przypadkach zniszczeniu. Dodatkowo na terenach
+    miejskich często można spotkać budynki wymagające dużego ograniczenia wpływu
+    drgań za względu na pełnione funkcje. Różnego rodzaju laboratoria, szpitale
+    czy przemysł precyzyjny nie dopuszczają występowania drgań o amplitudach
+    uniemożliwiających pełnienie danej funkcji przez mieszczący je budynek.
+    
+    Istnieją różne metody pomiaru oraz analizy drgań oddziałujących na budynki
+    jednak pewne dokumenty normatywne pozwalają na określenie wpływu drgań oraz
+    weryfikację pomiarową i późniejsze porównania, czy też odniesienie wyników
+    do wartości dopuszczalnych. Norma PN-B 02170:2016-12 pod tytułem ,,Ocena
+    szkodliwości drgań przekazywanych przez podłoże na budynki'' \cite{norma}
+    zawiera przede wszystkim metodykę oceny wpływu drgań, ale można w niej
+    znaleźć również unormowane zasady wykonywania pomiarów.
 
     \section{Założenia projektowe}
 
     \section{Opis realizacji projektu}
 
     \section{Wnioski}
+
+    \printbibliography
 
 \end{document}
