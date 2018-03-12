@@ -50,19 +50,17 @@ Treść streszczenia
 
 \noindent
 \textbf{Abstrakt} \\
-Współczesne rozwiązania dedykowane do pomiarów drgań budynków
-proponowane przez popularnych producentów sprzętu pomiarowego
-charakteryzują się dużym stopniem skomplikowania. Celem niniejszego
-projektu było zbudowanie prostego i przystępnego cenowo systemu
-pozwalającego na pomiar i analizę drgań budynków zgodną z normą PN-B
-02170:2016-12. Postanowiono stworzyć system pomiarowy oparty na
-platformie Raspberry Pi® oraz wykorzystujący akcelerometry typu MEMS w
-celu minimalizacji kosztów i rozmiarów stacji. Oprogramowanie
-kontrolujące akwizycję oraz analizę danych napisano przy użyciu języka
-Python i odpowiednich bibliotek. Skonstruowanie oraz uruchomienie
-zaprogramowanego układu ma bezpośrednio przyczynić się do realizacji
-większego projektu obejmującego połączenie takich jednostek analizujący
-drgania na większym obszarze.
+Współczesne rozwiązania dedykowane do pomiarów drgań budynków proponowane przez
+popularnych producentów sprzętu pomiarowego charakteryzują się dużym stopniem
+skomplikowania. Celem niniejszego projektu było zbudowanie prostego i
+przystępnego cenowo systemu pozwalającego na pomiar i analizę drgań budynków
+zgodną z normą PN-B 02170:2016-12. Postanowiono stworzyć system pomiarowy
+oparty na platformie Raspberry Pi® oraz wykorzystujący akcelerometry typu MEMS
+w celu minimalizacji kosztów i rozmiarów stacji. Oprogramowanie kontrolujące
+akwizycję oraz analizę danych napisano przy użyciu języka Python i odpowiednich
+bibliotek. Skonstruowanie oraz uruchomienie zaprogramowanego układu ma
+bezpośrednio przyczynić się do realizacji większego projektu obejmującego
+połączenie takich jednostek analizujący drgania na większym obszarze.
 \vspace*{24pt}
 
 \section{Wstęp}
@@ -88,8 +86,17 @@ wolnego oprogramowania, a cały kod napisany podczas jego realizacji umieszczono
 na platformie GitHub.
 
 \section{Opis realizacji projektu}
+Stację badawczą skonstruowano z mikrokomputera Raspberry Pi 3 model B oraz
+trzyosiowego akcelerometru MMA8451 firmy Adafruit. Wykorzystany model Rasberry
+Pi posiada moduł Wi-Fi co uniezależnia go od dostępności sieci kablowej i
+pozwala umieści stację badawczą w dowolnym miejscu z zasięgiem sieci
+bezprzewodowej i dostępem do zasilania sieciowego. Wybrany akcelerometr posiada
+możliwość rejestracji z rozdzielczością bitową ośmiu lub czternastu bitów.
+Ponadto może pracować w jednym z trzech zakresów \SI{2}{\g}, \SI{4}{\g} lub
+\SI{8}{\g}. Wykorzystuje on interfejs I\textsuperscript{2}C, co pozwala go
+bezpośrednio podłączyć do pinów wejścia-wyjścia ogólnego przeznaczenia (GPIO)
+na mikrokomputerze.
 
 \section{Wnioski}
-
 
 \end{document}
