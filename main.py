@@ -25,7 +25,8 @@ if MMA8451.whoAmI() != accel.deviceName:
 
 while True:  # forever loop
     print ("\nCurrent Date-Time: " + str(datetime.datetime.now()))
-    axes = MMA8451.getAxisValue()
-    printAcceleration(axes['x'], axes['y'], axes['z'])
-
+#    axes = MMA8451.getAxisValue()
+#    printAcceleration(axes['x'], axes['y'], axes['z'])
+    test_val = MMA8451.getFifoValues()
+    print(test_val)
     time.sleep(0.5)
