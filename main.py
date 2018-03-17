@@ -7,12 +7,12 @@ import sys
 
 def sigint_handler(signal, frame):
     print('Exiting...')
+    MMA8451.cleanup()
     sys.exit(0)
 
 signal.signal(signal.SIGINT, sigint_handler)
 
 MMA8451 = accel.Accel()
-MMA8451.init()
 
 def printAcceleration(xaccel, yaccel, zaccel):
     print("   x (m/s2)= %+.3f" % (xaccel))
@@ -23,10 +23,5 @@ if MMA8451.whoAmI() != accel.deviceName:
     print("Error! Device not recognized! (" + str(accel.deviceName) + ")")
     sys.exit()
 
-while True:  # forever loop
-    print ("\nCurrent Date-Time: " + str(datetime.datetime.now()))
-#    axes = MMA8451.getAxisValue()
-#    printAcceleration(axes['x'], axes['y'], axes['z'])
-    test_val = MMA8451.getFifoValues()
-    print(test_val)
-    time.sleep(0.5)
+MMA8451.init_callback()
+time.sleep(30)
