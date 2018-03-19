@@ -15,5 +15,5 @@ signal.signal(signal.SIGINT, sigint_handler)
 MMA8451 = accel.Accel()
 
 MMA8451.init_callback()
-time.sleep(30)
+time.sleep(5)
 MMA8451.cleanup()
