@@ -7,7 +7,6 @@ import signal
 from scipy.constants import g
 import numpy as np
 import sys
-import numpy as np
 
 def sigint_handler(signal, frame):
     print('Exiting...')
@@ -50,12 +49,17 @@ np.savetxt("out.txt",sigdta)
 
 fs = 800
 
-frq = acoustics.signal.OctaveBand(fstart=12.5, fstop=200, fraction=3)
+frq = acoustics.signal.OctaveBand(fstart=0.5, fstop=100, fraction=3)
 
 frq.sample_frequency = fs
 
 filter = acoustics.signal.Filterbank(frq)
 
-y_f = filter.power(sigdta[:,0])
+y_f = filter.lfilter(sigdta[:,0])
 
-print(y_f)
+filt_data = list(y_f)
+
+result = np.zeros(len(filt_data))
+for it in range(len(filt_data)):
+    result[it] = np.sqrt(np.mean(np.square(filt_data[it])))
+    print(result[it])
