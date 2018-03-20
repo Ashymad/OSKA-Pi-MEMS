@@ -51,11 +51,9 @@ fs = 800
 
 frq = acoustics.signal.OctaveBand(fstart=0.5, fstop=100, fraction=3)
 
-frq.sample_frequency = fs
+filt = acoustics.signal.Filterbank(frq, sample_frequency=fs)
 
-filter = acoustics.signal.Filterbank(frq)
-
-y_f = filter.lfilter(sigdta[:,0])
+y_f = filt.lfilter(sigdta[:,0])
 
 filt_data = list(y_f)
 
