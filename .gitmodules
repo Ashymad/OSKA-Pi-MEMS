@@ -1,0 +1,3 @@
+[submodule "code/mma8451"]
+	path = code/mma8451
+	url = git@github.com:Ashymad/python-mma8451
