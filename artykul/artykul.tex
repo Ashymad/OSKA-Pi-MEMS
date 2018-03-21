@@ -102,14 +102,37 @@ znaleźć również unormowane zasady wykonywania pomiarów.
 \section{Założenia projektowe}
 
 Głównym założeniem projektu była prostota konstrukcji, dostępność elementów i
-ich zgodność z wymogami pomiarów określonych w normie [odn]. Ponadto w procesie
-przetwarzania i analizy sygnału wykorzystano wyłącznie biblioteki na licencji
-wolnego oprogramowania, a cały kod napisany podczas jego realizacji umieszczono
-na platformie GitHub.
+ich zgodność z wymogami pomiarów określonych w normie \cite{norma}. Charakter
+sygnału drgań mierzonego na potrzeby normy określają następujące parametry:
+\begin{itemize}
+  \item Pasmo częstotliwości od \SI{0,5}{\hertz} do \SI{100}{\hertz}
+  \item Amplituda prędkości drgań od \SI{e-4}{\metre\per\second} do \SI{1}{\metre\per\second}
+  \item Amplituda przyspieszenia drgań od \SI{e-3}{\metre\per\square\second} do \SI{10}{\metre\per\square\second}
+\end{itemize}
+Norma wskazuje również na posiadanie możliwości zapisu w pamięci urządzenia
+zarejestrowanych wibrogramów. Analiza powinna być prowadzona w pasmach
+tercjowych. W procesie przetwarzania i analizy sygnału wykorzystano wyłącznie
+biblioteki na licencji wolnego oprogramowania, a cały kod napisany podczas jego
+realizacji umieszczono na platformie GitHub.
+
+\section{Przegląd dostępnych rozwiązań}
+
+Na przestrzeni ostatnich lat popularne stało się wykorzystanie platform
+komputerowych wspierających naukę programowania takich jak Arduino czy Raspberry
+Pi do tworzenia wszelkiego rodzaju platform pomiarowych. Takie aplikacje
+znajdują również zastosowania w pomiarach wibroakustycznych. Platforma Raspberry
+Pi, ponieważ w zasadzie jest samodzielnym komputerem z systemem operacyjnym
+opartym na jądrze Linux, daje duże możliwości tworzenia samodzielnych systemów
+pomiarowych. Do tej pory dominującym podejściem pomiarowym drgań oraz hałasu
+jest wykorzystanie analogowego przetwornika będącego osobnym elementem toru
+pomiarowego. Sygnał analogowy jest przesyłany z reguły do karty pomiarowej, a
+następnie, pod postacią cyfrową, trafia do komputera który jest odpowiedzialny
+za jego analizę. W wielu przypadkach duża dokładność pomiaru wymusza zastosowanie profesjonalnych, wyspecjalizowanych przetworników, ale niekiedy zdarza się, że sygnał pomiarowy nie wymaga bardzo dużej rozdzielczości lub częstotliwości próbkowania. 
 
 \section{Opis realizacji projektu}
+
 Stację badawczą skonstruowano z mikrokomputera Raspberry Pi 3 model B oraz
-trzyosiowego akcelerometru MMA8451 firmy Adafruit. Wykorzystany model Rasberry
+trzyosiowego akcelerometru MMA8451 firmy Adafruit. Wykorzystany model Raspberry
 Pi posiada moduł Wi-Fi co uniezależnia go od dostępności sieci kablowej i
 pozwala umieści stację badawczą w dowolnym miejscu z zasięgiem sieci
 bezprzewodowej i dostępem do zasilania sieciowego. Wybrany akcelerometr posiada
