@@ -19,7 +19,8 @@ signal.signal(signal.SIGINT, sigint_handler)
 MMA8451 = accel.Accel()
 
 MMA8451.init_callback()
-time.sleep(60)
+t = 10
+time.sleep(t)
 MMA8451.cleanup()
 
 data = MMA8451.getQueue()
@@ -29,7 +30,7 @@ prec = 14
 fs = 800
 
 def reg2float(msb, lsb):
-    num = ((msb << 8) | lsb) >> 2
+    num = ((int(msb) << 8) | int(lsb)) >> 2
     maxn = 2**(prec-1)-1
     signed_maxn = 2**prec
     num -= signed_maxn if num > maxn else 0
@@ -44,7 +45,7 @@ def prepare_data(bitvec):
     return data
 
 def reg2uint(msb, lsb):
-    num = ((msb << 8) | lsb) >> 2
+    num = ((int(msb) << 8) | int(lsb)) >> 2
     maxn = 2**(prec-1)-1
     signed_maxn = 2**prec
     num -= signed_maxn if num > maxn else 0
