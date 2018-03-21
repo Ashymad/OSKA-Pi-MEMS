@@ -82,7 +82,7 @@ z wielu pól na których można je stosować jest badanie wpływu wibracji
 podłoża na budynki. Źródła drgań oddziałujące na obiekty budowlane są
 zróżnicowane, ale najczęściej pochodzą od wszelkich środków transportu
 eksploatowanych w bezpośredniej bliskości zabudowy. W miastach wzmożona
-komunikacja samochodowa, ruch tramwajowy, a nawet metro, potrafią powodować
+komunikacja samochodowa, ruch tramwajowy, a nawet metro potrafią powodować
 występowanie drgań o dużych amplitudach przyspieszeń. Z kolei konstrukcje
 budynków poddawane długotrwałej ekspozycji na drgania mogą ulegać
 uszkodzeniom, a w skrajnych przypadkach zniszczeniu. Dodatkowo na terenach
@@ -98,6 +98,26 @@ do wartości dopuszczalnych. Norma PN-B 02170:2016-12 pod tytułem ,,Ocena
 szkodliwości drgań przekazywanych przez podłoże na budynki'' \cite{norma}
 zawiera przede wszystkim metodykę oceny wpływu drgań, ale można w niej
 znaleźć również unormowane zasady wykonywania pomiarów.
+
+\section{Przegląd dostępnych rozwiązań}
+
+Na przestrzeni ostatnich lat popularne stało się wykorzystanie platform
+komputerowych wspierających naukę programowania takich jak Arduino czy Raspberry
+Pi do tworzenia wszelkiego rodzaju jednostek pomiarowych. Takie aplikacje
+znajdują również zastosowania w pomiarach wibroakustycznych. Platforma Raspberry
+Pi, ponieważ w zasadzie jest samodzielnym komputerem z systemem operacyjnym
+opartym na jądrze Linux, daje duże możliwości tworzenia samodzielnych systemów
+pomiarowych. Do tej pory dominującym podejściem pomiarowym drgań oraz hałasu
+jest wykorzystanie analogowego przetwornika będącego osobnym elementem toru
+pomiarowego. Sygnał analogowy jest przesyłany z reguły do karty pomiarowej, a
+następnie, pod postacią cyfrową, trafia do komputera który jest odpowiedzialny
+za jego analizę. W wielu przypadkach duża dokładność pomiaru wymusza
+zastosowanie profesjonalnych, wyspecjalizowanych przetworników, ale niekiedy
+zdarza się, że sygnał pomiarowy nie wymaga bardzo dużej rozdzielczości lub
+częstotliwości próbkowania. Podejmowano już pracę nad stworzeniem systemów
+analizy drgań opartym na platformie Raspberry Pi \cite{art1}. Autorzy publikacji
+skupili się na opracowaniu systemu monitorowania i analizy drgań na podstawie
+widma, tak aby łatwo dało się go dostosować do środowiska działania. 
 
 \section{Założenia projektowe}
 
@@ -115,34 +135,45 @@ tercjowych. W procesie przetwarzania i analizy sygnału wykorzystano wyłącznie
 biblioteki na licencji wolnego oprogramowania, a cały kod napisany podczas jego
 realizacji umieszczono na platformie GitHub.
 
-\section{Przegląd dostępnych rozwiązań}
-
-Na przestrzeni ostatnich lat popularne stało się wykorzystanie platform
-komputerowych wspierających naukę programowania takich jak Arduino czy Raspberry
-Pi do tworzenia wszelkiego rodzaju platform pomiarowych. Takie aplikacje
-znajdują również zastosowania w pomiarach wibroakustycznych. Platforma Raspberry
-Pi, ponieważ w zasadzie jest samodzielnym komputerem z systemem operacyjnym
-opartym na jądrze Linux, daje duże możliwości tworzenia samodzielnych systemów
-pomiarowych. Do tej pory dominującym podejściem pomiarowym drgań oraz hałasu
-jest wykorzystanie analogowego przetwornika będącego osobnym elementem toru
-pomiarowego. Sygnał analogowy jest przesyłany z reguły do karty pomiarowej, a
-następnie, pod postacią cyfrową, trafia do komputera który jest odpowiedzialny
-za jego analizę. W wielu przypadkach duża dokładność pomiaru wymusza zastosowanie profesjonalnych, wyspecjalizowanych przetworników, ale niekiedy zdarza się, że sygnał pomiarowy nie wymaga bardzo dużej rozdzielczości lub częstotliwości próbkowania. 
-
 \section{Opis realizacji projektu}
 
-Stację badawczą skonstruowano z mikrokomputera Raspberry Pi 3 model B oraz
-trzyosiowego akcelerometru MMA8451 firmy Adafruit. Wykorzystany model Raspberry
-Pi posiada moduł Wi-Fi co uniezależnia go od dostępności sieci kablowej i
-pozwala umieści stację badawczą w dowolnym miejscu z zasięgiem sieci
-bezprzewodowej i dostępem do zasilania sieciowego. Wybrany akcelerometr posiada
-możliwość rejestracji z rozdzielczością bitową ośmiu lub czternastu bitów.
-Ponadto może pracować w jednym z trzech zakresów \SI{2}{\g}, \SI{4}{\g} lub
-\SI{8}{\g}. Wykorzystuje on interfejs I\textsuperscript{2}C, co pozwala go
-bezpośrednio podłączyć do pinów wejścia-wyjścia ogólnego przeznaczenia (GPIO)
-na mikrokomputerze.
+Stacja pomiarowa będąca przedmiotem niniejszego projektu została oparta o
+platformę Raspberry Pi 3 model B. Jako czujnik drgań wybrano moduł akcelerometru
+MEMS MMA8451 firmy Adafruit. Jest on niewielkich rozmiarów, pozwala na pomiar
+przyspieszenia drgań w trzech osiach. Posiada wbudowany, 14-bitowy przetwornik
+analogowo-cyfrowy oraz ma możliwość komunikacji z mikroprocesorem za pomocą
+interfejsu I\textsuperscript{2}C. Warto także zaznaczyć, że akcelerometr ten
+pozwala na wybór jednego z trzech dostępnych zakresów pomiarowych:
+$\pm$\SI{2}{\g}, $\pm$\SI{4}{\g} oraz $\pm$\SI{8}{\g}. Częstotliwość próbkowania
+także może być zmieniana przez użytkownika, a jej największa wartość to
+\SI{800}{\hertz}. Akcelerometr posiada również wiele wbudowanych funkcji, między
+innymi filtr górnoprzepustowy.
+
+Jako system operacyjny dla mikrokomputera wybrano Rasbian -- przygotowaną
+specjalnie dla Raspberry Pi dystrybucję Linuxa. Wybrano wersję Lite, jedynie z
+obsługą z poziomu terminala. Komunikacja z komputerem pozwalająca na
+oprogramowanie oraz obsługę stacji odbywała się przez protokół SSH.
+Mikrokomputer posada zarówno złącze Ethernet jak i moduł Wi-Fi, co umożliwia
+podłączenie go do sieci LAN.
+
+% opis kodu
+
+Stacja pomiarowa jest zdolna do zapisania w swojej pamięci wewnętrznej około X
+godzin wibrogramu. Ponieważ norma wymaga analizy tercjowej drgań, uwzględniono
+filtrację sygnału w pasmach od \SI{0,5}{\hertz} do \SI{100}{\hertz}.
+
+% przykładowe pomiary
 
 \section{Wnioski}
+
+% wnioski ogólne i dotyczące wyników
+
+Należy pamiętać, że projekt ten jest częścią większego, mającego objąć swoim
+zakresem pomiary zarówno drgań jak i hałasu środowiskowego. Stacje pomiarowe
+wyposażone w akcelerometry oraz mikrofony rejestrowałyby dane, a następnie
+wysyłały je na serwer sieciowy, gdzie byłyby one analizowane oraz przechowywane.
+Dostęp do nich byłby możliwy przez aplikację hosta, gdzie można by było
+przeglądać dane aktualne oraz analizować dane archiwalne.
 
 \printbibliography
 
