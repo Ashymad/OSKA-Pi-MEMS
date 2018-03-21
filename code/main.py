@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 from mma8451 import accel
 import acoustics.signal
-import datetime
 import time
 import signal
 from scipy.constants import g
 from scipy.io import wavfile
 import numpy as np
+import h5py as h5
 import sys
 
 def sigint_handler(signal, frame):
@@ -19,7 +19,7 @@ signal.signal(signal.SIGINT, sigint_handler)
 MMA8451 = accel.Accel()
 
 MMA8451.init_callback()
-t = 10
+t = 600
 time.sleep(t)
 MMA8451.cleanup()
 
