@@ -29,6 +29,41 @@ autolang=other,
 backend=biber,
 ]{biblatex}
 
+\usepackage{listings}
+\usepackage{color}
+
+\floatstyle{plaintop}
+\ifcsname{chapter}\endcsname%
+    \newfloat{program}{!tbh}{lop}[chapter]
+\else%
+    \newfloat{program}{!tbh}{lop}
+\fi
+\floatname{program}{Kod źr.}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},     % choose the background color
+  basicstyle=\ttfamily\footnotesize, % size of fonts used for the code
+  breaklines, breakatwhitespace,     % automatic line breaking only at whitespace
+  commentstyle=\color{mygreen},      % comment style
+  numbers=left,
+  showstringspaces=false,
+  numberstyle=\tiny,
+  frame=l,
+  language=Python,
+  escapeinside={\%*}{*)},            % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},         % keyword style
+  stringstyle=\color{mymauve}        % string literal style
+}
+
+\AtBeginDocument{
+  \renewcommand{\tablename}{Tab.}
+  \renewcommand{\figurename}{Rys.}
+}
+
 \usepackage{csquotes}
 \DeclareQuoteAlias{croatian}{polish}
 
@@ -70,7 +105,7 @@ popularnych producentów sprzętu pomiarowego charakteryzują się dużym stopni
 skomplikowania. Celem niniejszego projektu było zbudowanie prostego i
 przystępnego cenowo systemu pozwalającego na pomiar i analizę drgań budynków
 zgodną z normą PN-B 02170:2016-12. Postanowiono stworzyć system pomiarowy
-oparty na platformie Raspberry Pi® oraz wykorzystujący akcelerometry typu MEMS
+o party na platformie Raspberry Pi® oraz wykorzystujący akcelerometry typu MEMS
 w celu minimalizacji kosztów i rozmiarów stacji. Oprogramowanie kontrolujące
 akwizycję oraz analizę danych napisano przy użyciu języka Python i odpowiednich
 bibliotek. Skonstruowanie oraz uruchomienie zaprogramowanego układu ma
@@ -145,16 +180,16 @@ realizacji umieszczono na platformie GitHub.
 \section{Opis realizacji projektu}
 
 Stacja pomiarowa będąca przedmiotem niniejszego projektu została oparta o
-platformę Raspberry Pi 3 model B. Jako czujnik drgań wybrano moduł akcelerometru
-MEMS MMA8451 firmy Adafruit~\cite{mma8451}. Jest on niewielkich rozmiarów, pozwala na pomiar
-przyspieszenia drgań w trzech osiach. Posiada wbudowany, 14-bitowy przetwornik
-analogowo-cyfrowy oraz ma możliwość komunikacji z mikroprocesorem za pomocą
-interfejsu I\textsuperscript{2}C. Warto także zaznaczyć, że akcelerometr ten
-pozwala na wybór jednego z trzech dostępnych zakresów pomiarowych:
-$\pm$\SI{2}{\g}, $\pm$\SI{4}{\g} oraz $\pm$\SI{8}{\g}. Częstotliwość próbkowania
-także może być zmieniana przez użytkownika, a jej największa wartość to
-\SI{800}{\hertz}. Akcelerometr posiada również wiele wbudowanych funkcji, między
-innymi filtr górnoprzepustowy.
+platformę Raspberry Pi 3 model B. Jako czujnik drgań wybrano moduł
+akcelerometru MEMS MMA8451 firmy Adafruit~\cite{mma8451}. Jest on niewielkich
+rozmiarów, pozwala na pomiar przyspieszenia drgań w trzech osiach jednocześnie.
+Posiada wbudowany, 14-bitowy przetwornik analogowo-cyfrowy oraz ma możliwość
+komunikacji z mikroprocesorem za pomocą interfejsu I\textsuperscript{2}C. Warto
+także zaznaczyć, że akcelerometr ten pozwala na wybór jednego z trzech
+dostępnych zakresów pomiarowych: $\pm$\SI{2}{\g}, $\pm$\SI{4}{\g} oraz
+$\pm$\SI{8}{\g}.  Częstotliwość próbkowania także może być zmieniana przez
+użytkownika, a jej największa wartość to \SI{800}{\hertz}. Akcelerometr posiada
+również wiele wbudowanych funkcji, między innymi filtr górnoprzepustowy.
 
 Jako system operacyjny dla mikrokomputera wybrano Rasbian -- przygotowaną
 specjalnie dla Raspberry Pi dystrybucję Linuxa. Wybrano wersję Lite, jedynie z
@@ -178,18 +213,31 @@ logiki odwróconej, a jego warstwa łącza danych oparta jest o system bajtowy. 
 przesłaniu 8-bitowej ramki danych następuje wysłanie bitu potwierdzającego
 odbiór. Aby transmisja była możliwa konieczne jest zastosowanie rezystorów
 podciągających do linii zasilania. Zostały one uwzględnione przez producenta
-modułu akcelerometru i są umieszczone na płytce drukowanej. Dodatkowe dwie linie
-to zasilanie modułu o wartości $+$\SI{5}{\volt} (VIN) oraz potencjał masy (GND).
-Ostatnią linię stanowi linia sygnału przerwania (I1), której działanie zostanie
-opisane później.
+modułu akcelerometru i są umieszczone na płytce drukowanej. Dodatkowe dwie
+linie to zasilanie modułu, którego napięcie, dzięki wewnętrznemu regulatorowi
+napięcia, może zawierać się w przedziale od $+$\SI{3.3}{\volt} do
+$+$\SI{5}{\volt} (VIN) oraz potencjał masy (GND).  Ostatnią linię stanowi linia
+sygnału przerwania (I1), której działanie zostanie opisane później.
 
 Od strony mikrokomputera Raspberry Pi obsługę wyżej wymienionych linii zapewnia
 panel GPIO (General Purpose Input Output). Znajdują się w nim piny zasilające,
-uziemienia oraz wiele pinów dedykowanych do konkretnych protokołów komunikacji,
-w tym I\textsuperscript{2}C. Na poziomie oprogramowania do obsługi komunikacji
-przez wybrany protokół pomocny jest pakiet narzędzi
-{\fontfamily{\ttdefault}\selectfont i2c-tools}, który między innymi pozwala
-odczytać adres urządzeń podłączonych do magistrali.
+uziemienia, piny dedykowanych do konkretnych protokołów komunikacji, w tym
+I\textsuperscript{2}C, i piny których przeznaczenie nie jest ustalone.  Na
+poziomie oprogramowania do obsługi komunikacji przez wybrany protokół pomocny
+jest pakiet narzędzi {\fontfamily{\ttdefault}\selectfont i2c-tools}, który
+między innymi pozwala odczytać adres urządzeń podłączonych do magistrali.
+
+Główną częścią projektu było napisanie biblioteki do obsługi używanego
+akcelerometru, oraz kodu który ją wykorzystuje w celu nieprzerwanej akwizycji i
+zapisu danych pomiarowych. Dokładne działanie urządzenia zostało opisane w
+dokumentacji \cite{mma8451}. Komunikacja z urządzeniem, przez protokół
+I\textsuperscript{2}C, polegała na zapisie i odczycie danych z rejestrów.
+Pierwszym krokiem było stworzenie części biblioteki która w wygodny sposób
+pozwoli ustawiać flagi (kombinacje bitów w rejestrach, które sygnalizują
+urządzeniu pożądaną konfigurację) i odczytywać dane z tych rejestrów. W tym
+celu stworzono klasy \lstinline|Flag| i \lstinline|Register|, które
+przechowują liczby odpowiadające odpowiednio kombinacji bitów flagi i
+adresowi rejestru.
 
 \begin{figure}[H]
   \centering
@@ -199,8 +247,8 @@ odczytać adres urządzeń podłączonych do magistrali.
 \end{figure}
 % opis kodu
 
-Stacja pomiarowa jest zdolna do zapisania w swojej pamięci wewnętrznej około X
-godzin wibrogramu. Ponieważ norma wymaga analizy tercjowej drgań, uwzględniono
+Stacja pomiarowa jest zdolna do zapisania w swojej pamięci wewnętrznej około
+miesiąca wibrogramu. Ponieważ norma wymaga analizy tercjowej drgań, uwzględniono
 filtrację sygnału w pasmach od \SI{0,5}{\hertz} do \SI{100}{\hertz}.
 
 \begin{figure}[H]
