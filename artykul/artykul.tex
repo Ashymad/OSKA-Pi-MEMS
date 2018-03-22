@@ -239,6 +239,20 @@ celu stworzono klasy \lstinline|Flag| i \lstinline|Register|, które
 przechowują liczby odpowiadające odpowiednio kombinacji bitów flagi i
 adresowi rejestru.
 
+% przykładowy kod
+
+Następnie stworzono klasę \lstinline|IIC|, która, posiada metody pozwalające na
+zapis wartości do rejestrów, jak i odczyt wartości przy wykorzystaniu uprzednio
+stworzonych typów. Szczególnie ważne było stworzenie metody pozyskiwania
+wartości w trybie \emph{burst}, który pozwala na odczyt wielu wartości naraz
+jednym ciągiem danych.
+
+% przykładowy kod
+
+Po napisaniu tych elementów biblioteki zajęto się jej główną częścią, służącą
+do inicjalizacji urządzenia, obsługi przerwań, ustawienia pożądanych parametrów
+i przygotowania wątków i procesów ciągłej akwizycji i zapisu danych.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{bitgraphics/pi.png}
