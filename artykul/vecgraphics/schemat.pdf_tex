@@ -1,0 +1,72 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'schemat.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{390bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.35384615)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{schemat.pdf}}%
+    \put(0.24011623,0.26178818){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Akcelerometr}}}%
+    \put(0.58207338,0.26948061){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Mikrokomputer}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{schemat.pdf}}%
+    \put(0.70102417,0.10722698){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Pamięć}}}%
+    \put(0.56726656,0.1058573){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Moduł}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{schemat.pdf}}%
+    \put(0.2807797,0.11951357){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Moduł}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{schemat.pdf}}%
+    \put(0.46057691,0.27019418){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{VIN}}}%
+    \put(0.45302195,0.21717078){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{GND}}}%
+    \put(0.45535713,0.17156521){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{SDA}}}%
+    \put(0.45578212,0.12044407){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{SCL}}}%
+    \put(0.47197802,0.07513661){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{I1}}}%
+    \put(0.2455357,0.23179948){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{MMA8451Q}}}%
+    \put(0.26785713,0.0910028){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Adafruit}}}%
+    \put(0.571772,0.0780907){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Wi-Fi}}}%
+    \put(0.71394231,0.07795318){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Flash}}}%
+    \put(0.58887362,0.2379807){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Raspberry Pi 3}}}%
+  \end{picture}%
+\endgroup%
