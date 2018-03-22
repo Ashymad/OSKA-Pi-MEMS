@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from mma8451 import mma8451
+from threading import Lock
 import time
 import signal
 import sys
@@ -14,6 +15,7 @@ signal.signal(signal.SIGINT, sigint_handler)
 MMA8451 = mma8451.Accel()
 
 MMA8451.init_callback()
-t = 300
+print('Finished initialization')
+t = 60*60*8
 time.sleep(t)
 MMA8451.cleanup()
