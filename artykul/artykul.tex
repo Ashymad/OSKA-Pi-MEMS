@@ -119,9 +119,12 @@ za jego analizę. W wielu przypadkach duża dokładność pomiaru wymusza
 zastosowanie profesjonalnych, wyspecjalizowanych przetworników, ale niekiedy
 zdarza się, że sygnał pomiarowy nie wymaga bardzo dużej rozdzielczości lub
 częstotliwości próbkowania. Podejmowano już pracę nad stworzeniem systemów
-analizy drgań opartym na platformie Raspberry Pi \cite{art1}. Autorzy publikacji
-skupili się na opracowaniu systemu monitorowania i analizy drgań na podstawie
-widma, tak aby łatwo dało się go dostosować do środowiska działania. 
+analizy drgań opartym na platformie Raspberry Pi. Przykładem może być praca pod
+tytułem ,,Development of a system for monitoring vibration accelerations based
+on the Raspberry Pi microcomputer and the ADXL345 accelerometer''~\cite{art1}.
+Autorzy publikacji skupili się na opracowaniu systemu monitorowania i analizy
+drgań na podstawie widma, tak aby łatwo dało się go dostosować do środowiska
+działania. 
 
 \section{Założenia projektowe}
 
@@ -143,7 +146,7 @@ realizacji umieszczono na platformie GitHub.
 
 Stacja pomiarowa będąca przedmiotem niniejszego projektu została oparta o
 platformę Raspberry Pi 3 model B. Jako czujnik drgań wybrano moduł akcelerometru
-MEMS MMA8451 firmy Adafruit. Jest on niewielkich rozmiarów, pozwala na pomiar
+MEMS MMA8451 firmy Adafruit~\cite{mma8451}. Jest on niewielkich rozmiarów, pozwala na pomiar
 przyspieszenia drgań w trzech osiach. Posiada wbudowany, 14-bitowy przetwornik
 analogowo-cyfrowy oraz ma możliwość komunikacji z mikroprocesorem za pomocą
 interfejsu I\textsuperscript{2}C. Warto także zaznaczyć, że akcelerometr ten
@@ -158,7 +161,8 @@ specjalnie dla Raspberry Pi dystrybucję Linuxa. Wybrano wersję Lite, jedynie z
 obsługą z poziomu terminala. Komunikacja z komputerem pozwalająca na
 oprogramowanie oraz obsługę stacji odbywała się przez protokół SSH.
 Mikrokomputer posada zarówno złącze Ethernet jak i moduł Wi-Fi, co umożliwia
-podłączenie go do sieci LAN.
+podłączenie go do sieci LAN. Użyto kart pamięci o pojemności 16 GB aby możliwe
+było chwilowe zapisywanie pełnych przebiegów sygnałów drganiowych.
 
 \begin{figure}[H]
   \centering
@@ -166,6 +170,26 @@ podłączenie go do sieci LAN.
   \caption{Schemat stworzonego systemu pomiarowego}
   \label{fig:schemat}
 \end{figure}
+
+Użyty do komunikacji z mikroprocesorem protokół I\textsuperscript{2}C jest
+protokołem szeregowym oraz synchronicznym. Jego warstwa fizyczna składa się z
+linii danych (SDA) oraz linii zegarowej (SCL). I\textsuperscript{2}C korzysta z
+logiki odwróconej, a jego warstwa łącza danych oparta jest o system bajtowy. Po
+przesłaniu 8-bitowej ramki danych następuje wysłanie bitu potwierdzającego
+odbiór. Aby transmisja była możliwa konieczne jest zastosowanie rezystorów
+podciągających do linii zasilania. Zostały one uwzględnione przez producenta
+modułu akcelerometru i są umieszczone na płytce drukowanej. Dodatkowe dwie linie
+to zasilanie modułu o wartości $+$\SI{5}{\volt} (VIN) oraz potencjał masy (GND).
+Ostatnią linię stanowi linia sygnału przerwania (I1), której działanie zostanie
+opisane później.
+
+Od strony mikrokomputera Raspberry Pi obsługę wyżej wymienionych linii zapewnia
+panel GPIO (General Purpose Input Output). Znajdują się w nim piny zasilające,
+uziemienia oraz wiele pinów dedykowanych do konkretnych protokołów komunikacji,
+w tym I\textsuperscript{2}C. Na poziomie oprogramowania do obsługi komunikacji
+przez wybrany protokół pomocny jest pakiet narzędzi
+{\fontfamily{\ttdefault}\selectfont i2c-tools}, który między innymi pozwala
+odczytać adres urządzeń podłączonych do magistrali.
 
 \begin{figure}[H]
   \centering
