@@ -24,10 +24,13 @@
 \usepackage[%
 style=numeric,
 sorting=none,
-backend=biber,
 language=autobib,
 autolang=other,
+backend=biber,
 ]{biblatex}
+
+\usepackage{csquotes}
+\DeclareQuoteAlias{croatian}{polish}
 
 \addbibresource{bibliografia.bib}
 
@@ -189,6 +192,6 @@ wysyłały je na serwer sieciowy, gdzie byłyby one analizowane oraz przechowywa
 Dostęp do nich byłby możliwy przez aplikację hosta, gdzie można by było
 przeglądać dane aktualne oraz analizować dane archiwalne.
 
-\printbibliography
+\printbibliography[title=Bibliografia]
 
 \end{document}
