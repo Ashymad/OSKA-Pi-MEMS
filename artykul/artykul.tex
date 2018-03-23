@@ -7,6 +7,7 @@
 \usepackage{indentfirst}
 \frenchspacing
 
+\usepackage{dirtree}
 \usepackage{enumerate}
 \usepackage{csquotes}
 \usepackage{graphicx}
@@ -59,6 +60,27 @@ backend=biber,
   stringstyle=\color{mymauve}        % string literal style
 }
 
+\lstset{%
+  literate={ą}{{\k{a}}}1
+  {ć}{{\'c}}1
+  {ę}{{\k{e}}}1
+  {ó}{{\'o}}1
+  {ń}{{\'n}}1
+  {ł}{{\l{}}}1
+  {ś}{{\'s}}1
+  {ź}{{\'z}}1
+  {ż}{{\.z}}1
+  {Ą}{{\k{A}}}1
+  {Ć}{{\'C}}1
+  {Ę}{{\k{E}}}1
+  {Ó}{{\'O}}1
+  {Ń}{{\'N}}1
+  {Ł}{{\L{}}}1
+  {Ś}{{\'S}}1
+  {Ź}{{\'Z}}1
+  {Ż}{{\.Z}}1
+}
+
 \AtBeginDocument{
   \renewcommand{\tablename}{Tab.}
   \renewcommand{\figurename}{Rys.}
@@ -75,7 +97,6 @@ backend=biber,
 \let\Oldsubsubsection\subsubsection
 \renewcommand{\subsubsection}{\FloatBarrier\Oldsubsubsection}
 
-\usepackage{dirtree}
 
 \usepackage{csquotes}
 \DeclareQuoteAlias{croatian}{polish}
@@ -257,17 +278,56 @@ pozwoli ustawiać flagi (kombinacje bitów w rejestrach, które sygnalizują
 urządzeniu pożądaną konfigurację) i odczytywać dane z tych rejestrów. W tym
 celu stworzono klasy \lstinline|Flag| i \lstinline|Register|, które
 przechowują liczby odpowiadające odpowiednio kombinacji bitów flagi i
-adresowi rejestru.
+adresowi rejestru (Kod źr. \ref{code:reg}).
 
-% przykładowy kod
+\begin{program}
+  \caption{Definicja rejestru \lstinline|STATUS| i jego flag}
+  \begin{lstlisting}
+    import mma8451.register.addr as REG
+    from mma8451.register.classes import Flag
+
+    class STATUS(Flag):
+      _addr           = REG.STATUS
+      ZYXOW           = 0x80
+      ZOW             = 0x40
+      YOW             = 0x20
+      XOW             = 0x10
+      ZYXDR           = 0x08
+      ZDR             = 0x04
+      YDR             = 0x02
+      XDR             = 0x01
+  \end{lstlisting}
+  \label{code:reg}
+\end{program}
 
 Następnie stworzono klasę \lstinline|IIC|, która, posiada metody pozwalające na
 zapis wartości do rejestrów, jak i odczyt wartości przy wykorzystaniu uprzednio
 stworzonych typów. Szczególnie ważne było stworzenie metody pozyskiwania
 wartości w trybie \emph{burst}, który pozwala na odczyt wielu wartości naraz
-jednym ciągiem danych.
+jednym ciągiem danych. Wykorzystuje ona bibliotekę \emph{pigpio}.
 
-% przykładowy kod
+\begin{program}
+  \caption{Wykorzystanie klasy IIC do poboru danych}
+  \begin{lstlisting}
+    from mma8451.register import register as REG
+    from mma8451.iic import IIC
+    import pigpio
+
+    # Inicjalizacja połączenia z procesem pigpio
+    pi = pigpio.pi()
+    # Stwórz obiekt klasy, gdzie 1 do magistrala a 0x1D adres
+    iic = IIC(pi, 1, 0x1D)
+    # Uśpij urządzenie
+    iic.unset_flag(REG.CTRL_REG1.ACTIVE)
+    # Włącz tryb 14-to bitowy
+    iic.unset_flag(REG.CTRL_REG1.F_READ)
+    # Włacz urządzenie do trybu aktywnego
+    iic.set_flag(REG.CTRL_REG1.ACTIVE)
+    # Pobierz dane ze wszystkich trzech osi
+    dane = iic.block_read(REG.OUT_X_MSB, 6)
+  \end{lstlisting}
+  \label{code:iic}
+\end{program}
 
 Po napisaniu tych elementów biblioteki zajęto się jej główną częścią, służącą
 do inicjalizacji urządzenia, obsługi przerwań, ustawienia pożądanych parametrów
@@ -300,7 +360,7 @@ odpowiada pięciu minutom, przeprowadza zamianę uzyskanych wartości z kodu
 uzupełnień do dwóch na liczbę całkowitą ze znakiem, po czym uzyskaną macierz
 zawierającą dane ze wszystkich osi zapisuje do plik HDF5 w grupach
 odpowiadających dacie i godzinie zapisu. Wybrano format HDF5 z powodu na jego
-uniwersalność oraz wygodę wewnętrznej struktury \ref{fig:struc}.
+uniwersalność oraz wygodę wewnętrznej struktury (Rys. \ref{fig:struc}).
 
 \begin{figure}[!tbh]%
   \centering%
