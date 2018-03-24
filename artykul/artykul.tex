@@ -410,6 +410,13 @@ konstrukcyjnych znajdujących się w podpiwniczeniu budynku.
   \label{fig:imadlo}
 \end{figure}
 
+Wykresy \ref{plot:accel_x} oraz \ref{plot:power_x} pokazują wyniki pomiaru
+testowego. Przedstawiono fragment wibrogramu przyspieszenia drgań dla osi X
+(zorientowanej na kierunku pionowym, przeciwnie do kierunku przyspieszenia
+ziemskiego podczas pomiaru). Dodatkowo, pokazano widmo amplitudowe sygnału
+zarejestrowanego między godziną 7:00, a 8:00 rano (kiedy ruch samochodowy na
+pobliskiej ulicy jest największy).
+
 \begin{figure}[!tbh]
   \centering
   \input{./plots/accel_x.pgf}
@@ -424,9 +431,26 @@ konstrukcyjnych znajdujących się w podpiwniczeniu budynku.
   \label{plot:power_x}
 \end{figure}
 
+Jak można zauważyć na poniższych wykresach, rejestrowany sygnał jest
+prawdopodobnie pochodzenia szumowego, o losowym charakterze. Wskazuje na to
+płaska charakterystyka widma amplitudowego. Wynika z tego, że drgania badanego
+budynku mają na tyle małą amplitudę, że ich sygnał jest maskowany szumem
+wprowadzonym przez sam przetwornik oraz tor pomiarowy.
+
 \section{Wnioski}
 
-% wnioski ogólne i dotyczące wyników
+Zastosowanie rozwiązań opartych na powszechnie dostępnych mikrokomputerach oraz
+modułach akcelerometrów do pomiarów drgań budynków jest zadaniem stosunkowo
+trudnym. O ile stworzenie oprogramowania pozwalającego na akwizycję oraz analizę
+pełnego sygnału drgań - co pokazuje ów projekt - jest możliwe, o tyle problemy
+mogą pojawiać się w samych przetwornikach drgań. Niestety rynek modułów
+rozszerzeń opartych na akcelerometrach MEMS jest skierowany na zastosowania inne
+niż pomiarowe, często nie wymagające zwiększonej dokładności odwzorowania
+rzeczywistego przebiegu wibracji. Pomimo trudności napotkanych podczas pomiarów
+drgań o niskich amplitudach, skonstruowany system może być wykorzystywany w
+charakterze informacyjnym. Z zakresu pomiarowego wskazanego w normie można
+wnioskować, że jeżeli wystąpią drgania o amplitudach zagrażających budynkom,
+skonstruowana stacja pomiarowa będzie w stanie je zmierzyć.
 
 Należy pamiętać, że projekt ten jest częścią większego, mającego objąć swoim
 zakresem pomiary zarówno drgań jak i hałasu środowiskowego. Stacje pomiarowe
