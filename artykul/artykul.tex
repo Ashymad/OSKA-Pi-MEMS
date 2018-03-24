@@ -305,7 +305,7 @@ Następnie stworzono klasę \lstinline|IIC|, która, posiada metody pozwalające
 zapis wartości do rejestrów, jak i odczyt wartości przy wykorzystaniu uprzednio
 stworzonych typów. Szczególnie ważne było stworzenie metody pozyskiwania
 wartości w trybie \emph{burst}, który pozwala na odczyt wielu wartości naraz
-jednym ciągiem danych. Wykorzystuje ona bibliotekę \emph{pigpio}.
+jednym ciągiem danych. Wykorzystuje ona bibliotekę \emph{pigpio}~\cite{pigpio}.
 
 \begin{program}
   \caption{Wykorzystanie klasy IIC do poboru danych}
@@ -356,7 +356,7 @@ który się zajmuje ich zapisywaniem. Wątek akwizycji czeka na informację o
 dostępności nowych danych po czym odczytuje wszystkie próbki z kolejki
 wykorzystując do tego wspomniany wcześniej tryb \emph{burst}, a następnie
 zebrane wartości przekazuje do kolejki. Na dane w kolejce czeka proces
-zapisujący, który po zebraniu odpowiedniej ilości próbek, która w tym momencie
+zapisujący, który po zebraniu odpowiedniej liczby próbek, która w tym momencie
 odpowiada pięciu minutom, przeprowadza zamianę uzyskanych wartości z kodu
 uzupełnień do dwóch na liczbę całkowitą ze znakiem, po czym uzyskaną macierz
 zawierającą dane ze wszystkich osi zapisuje do plik HDF5 w grupach
@@ -429,10 +429,10 @@ konstrukcyjnych znajdujących się w podpiwniczeniu budynku.
 
 Należy pamiętać, że projekt ten jest częścią większego, mającego objąć swoim
 zakresem pomiary zarówno drgań jak i hałasu środowiskowego. Stacje pomiarowe
-wyposażone w akcelerometry oraz mikrofony rejestrowałyby dane, a następnie
-wysyłały je na serwer sieciowy, gdzie byłyby one analizowane oraz przechowywane.
-Dostęp do nich byłby możliwy przez aplikację hosta, gdzie można by było
-przeglądać dane aktualne oraz analizować dane archiwalne.
+wyposażone w akcelerometry oraz mikrofony będą rejestrować dane, a następnie
+wysyłać je na serwer sieciowy, gdzie będą one analizowane oraz przechowywane.
+Dostęp do nich będzie możliwy przez aplikację hosta, która będzie umożliwiać
+przeglądanie danych aktualnych oraz analizę danych archiwalnych.
 
 \printbibliography[title=Bibliografia]
 
