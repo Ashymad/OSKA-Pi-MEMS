@@ -7,6 +7,7 @@
 \usepackage{polski}
 \frenchspacing
 
+\usepackage[hidelinks]{hyperref}
 \usepackage{dirtree}
 \usepackage{enumerate}
 \usepackage{graphicx}
@@ -108,34 +109,21 @@ backend=biber,
 \begin{document}
 
 \onehalfspacing
-\begin{flushleft}
-
+{\raggedright%
   \textbf{Szymon \MakeUppercase{Mikulicz}} \\
   \textbf{Marcel \MakeUppercase{Piszak}} \\
-  \vspace*{12pt}
-
+  \vspace*{5pt}%
   \MakeUppercase{\textbf{Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}} \\
-  \vspace*{6pt}
+  \vspace*{5pt}%
   \MakeUppercase{\textbf{Vibroacoustic measuring station based on Raspberry Pi microcomputer}} \\
-  \vspace*{12pt}
-
-  AGH Akademia Górniczo-Hutnicza \\
-  Wydział Inżynierii Mechanicznej i Robotyki \\
-  Katedra Mechaniki i Wibroakustyki \\
-  \vspace*{6pt}
-
+  \vspace*{5pt}%
+  Akademia Górniczo-Hutnicza im. Stanisława Staszica w Krakowie\\
+  \vspace*{5pt}%
   czilukim@o2.pl \\
   marcel.piszak@wp.pl \\
-
-\end{flushleft}
-
-\noindent
-\textbf{Streszczenie} \\
-Treść streszczenia
-\vspace*{24pt}
-
-\noindent
-\textbf{Abstrakt} \\
+  \vspace*{5pt}%
+}%
+\noindent\textbf{Streszczenie}\\
 Współczesne rozwiązania dedykowane do pomiarów drgań budynków proponowane przez
 popularnych producentów sprzętu pomiarowego charakteryzują się dużym stopniem
 skomplikowania. Celem niniejszego projektu było zbudowanie prostego i
@@ -146,7 +134,24 @@ w celu minimalizacji kosztów i rozmiarów stacji. Oprogramowanie kontrolujące
 akwizycję oraz analizę danych napisano przy użyciu języka Python i odpowiednich
 bibliotek. Skonstruowanie oraz uruchomienie zaprogramowanego układu ma
 bezpośrednio przyczynić się do realizacji większego projektu obejmującego
-połączenie takich jednostek analizujący drgania na większym obszarze.
+połączenie takich jednostek analizujących drgania na większym obszarze.
+\vspace*{5pt}
+
+\noindent
+\begin{otherlanguage}{english}
+\textbf{Abstract} \\
+Systems for measurement of vibrations of buildings, currently offered by
+well-known manufacturers of measuring equipment are quite complicated. This
+project was started with a purpose of building an uncomplicated and affordable
+system able to measure and analyse buildings' vibrations in accordance with the
+PN-B 02170:2016-12 standard. As a base for the system a Raspberry Pi®
+microcomputer was chosen, and, as for the accelerometer, a MEMS-based one was
+used to reduce the cost and dimensions of the device. The software that run the
+measurement and analysis was written in the Python programming language with
+necessary libraries. The costruction and launch of the device is to be a step
+forward in a realization of a bigger project consisting of connecting together
+many of these devices to analyse vibrations on a bigger area.
+\end{otherlanguage}
 \vspace*{24pt}
 
 
@@ -211,7 +216,8 @@ Norma wskazuje również na posiadanie możliwości zapisu w pamięci urządzeni
 zarejestrowanych wibrogramów. Analiza powinna być prowadzona w pasmach
 tercjowych. W procesie przetwarzania i analizy sygnału wykorzystano wyłącznie
 biblioteki na licencji wolnego oprogramowania, a cały kod napisany podczas jego
-realizacji umieszczono na platformie GitHub.
+realizacji umieszczono na platformie
+GitHub\footnote{\url{https://github.com/Ashymad/OSKA-Pi-MEMS}}.
 
 \section{Opis realizacji projektu}
 
