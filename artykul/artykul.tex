@@ -9,7 +9,6 @@
 
 \usepackage{dirtree}
 \usepackage{enumerate}
-\usepackage{csquotes}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{makecell}
@@ -22,6 +21,8 @@
 \usepackage{setspace}
 \usepackage{import}
 \usepackage[all,defaultlines=2]{nowidow}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
 
 \usepackage[%
 style=numeric,
@@ -404,15 +405,15 @@ filtrację sygnału w pasmach od \SI{0,5}{\hertz} do \SI{100}{\hertz}.
 
 \begin{figure}[!tbh]
   \centering
-  \includegraphics[width=\textwidth]{plots/accel_x.pdf}
+  \input{./plots/accel_x.pgf}
   \caption{Fragment wibrogramu przyspieszenia drgań w osi X}
   \label{plot:accel_x}
 \end{figure}
 
 \begin{figure}[!tbh]
   \centering
-  \includegraphics[width=\textwidth]{plots/power_x.pdf}
-  \caption{Widmo energetyczne sygnału przyspieszenia drgań w osi X}
+  \input{./plots/ghost_x.pgf}
+  \caption{Widmo amplitudowe sygnału przyspieszenia drgań w osi X}
   \label{plot:power_x}
 \end{figure}
 
