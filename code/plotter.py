@@ -5,7 +5,6 @@ import acoustics
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
-from matplotlib.ticker import FormatStrFormatter
 from scipy.constants import g as gravity
 from mma8451.files import dataread
 import locale
