@@ -33,8 +33,7 @@ mpl.use("pgf")
 axes = ['x', 'y', 'z']
 
 plot_N = 1000
-frq_rng = acoustics.standards.iec_61672_1_2013.NOMINAL_THIRD_OCTAVE_CENTER_FREQUENCIES[7:31]/100
-frq_rng = list(map(lambda s: str(s).replace('.', ','),frq_rng))
+frq_rng = [str(s).replace('.', ',') for s in np.round(frq.nominal, 14)]
 bar_width = 0.9
 
 for i in range(0,3):
@@ -43,6 +42,7 @@ for i in range(0,3):
     plt.ylabel(r'Przyspieszenie drgań [\si{\meter\per\second\squared}]')
     plt.plot(t[0:plot_N], acc[0:plot_N,i])
     plt.savefig('../artykul/plots/accel_' + axes[i] + ".pgf")
+
 
     filt = np.sqrt(filtbank.power(acc[:,i]))
     lin = np.arange(len(filt))
