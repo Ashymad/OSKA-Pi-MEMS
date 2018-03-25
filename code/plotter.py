@@ -10,8 +10,12 @@ from scipy.constants import g as gravity
 from mma8451.files import dataread
 import locale
 import sys
+import platform
 
-locale.setlocale(locale.LC_NUMERIC, ('pl_PL', 'UTF-8'))
+if platform.system() == 'Windows':
+    locale.setlocale(locale.LC_NUMERIC, 'Polish')
+else:
+    locale.setlocale(locale.LC_NUMERIC, ('pl_PL', 'UTF-8'))
 
 with h5.File('data.h5','r') as f:
     data = dataread(f, "2018", '03', '23', '07')
