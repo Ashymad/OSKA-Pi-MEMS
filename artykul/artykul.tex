@@ -425,6 +425,12 @@ ziemskiego podczas pomiaru). Dodatkowo, pokazano widmo amplitudowe sygnału
 zarejestrowanego między godziną 7:00, a 8:00 rano (kiedy ruch samochodowy na
 pobliskiej ulicy jest największy).
 
+Jak można zauważyć na poniższych wykresach, rejestrowany sygnał jest
+prawdopodobnie pochodzenia szumowego, o losowym charakterze. Wskazuje na to
+płaska charakterystyka widma amplitudowego. Wynika z tego, że drgania badanego
+budynku mają na tyle małą amplitudę, że ich sygnał jest maskowany szumem
+wprowadzonym przez sam przetwornik oraz tor pomiarowy.
+
 \begin{figure}[!tbh]
   \centering
   \input{./plots/accel_x.pgf}
@@ -434,23 +440,28 @@ pobliskiej ulicy jest największy).
 
 \begin{figure}[!tbh]
   \centering
-  \input{./plots/ghost_z.pgf}
+  \input{./plots/ghost_x.pgf}
   \caption{Widmo amplitudowe sygnału przyspieszenia drgań w osi X}
   \label{plot:power_x}
 \end{figure}
 
+Moduł akcelerometru MMA8451, tak jak wiele podobnych dostępnych modułów
+produkowanych na potrzeby projektów edukacyjnych, jest przeznaczony do ogólnego
+wykrywania ruchu oraz orientacji. Ponieważ takie zastosowania wymagają jedynie
+zgrubnej oceny przyspieszenia drgań, a kładą główny nacisk na szybkość
+wykrywania zmian położenia oraz orientacji osi, przetworniki w nich
+wykorzystywane nie odznaczają się dużą precyzją. Wykres \ref{plot:accel_2_xyz}
+przedstawia przykładowy przebieg sygnałów wszystkich trzech osi akcelerometru
+podczas jego obracania. Można łatwo zauważyć, że na podstawie relacji między
+wartością przyspieszenia ziemskiego na poszczególnych osiach wyznaczenie
+orientacji modułu jest proste.
+
 \begin{figure}[!tbh]
   \centering
   \input{./plots/accel_2_xyz.pgf}
-  \caption{Wibrogram asd}
+  \caption{}
   \label{plot:accel_2_xyz}
 \end{figure}
-
-Jak można zauważyć na poniższych wykresach, rejestrowany sygnał jest
-prawdopodobnie pochodzenia szumowego, o losowym charakterze. Wskazuje na to
-płaska charakterystyka widma amplitudowego. Wynika z tego, że drgania badanego
-budynku mają na tyle małą amplitudę, że ich sygnał jest maskowany szumem
-wprowadzonym przez sam przetwornik oraz tor pomiarowy.
 
 \section{Wnioski}
 
