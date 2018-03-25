@@ -129,7 +129,7 @@ backend=biber,
 Współczesne rozwiązania dedykowane do pomiarów drgań budynków proponowane przez
 popularnych producentów sprzętu pomiarowego charakteryzują się dużym stopniem
 skomplikowania. Celem niniejszego projektu było zbudowanie prostego i
-przystępnego cenowo systemu pozwalającego na pomiar i analizę drgań budynków
+przystępnego cenowo systemu pozwalającego na pomiar i~analizę drgań budynków
 zgodną z normą PN-B 02170:2016-12. Postanowiono stworzyć system pomiarowy
 oparty na platformie Raspberry Pi® oraz wykorzystujący akcelerometry typu MEMS
 w celu minimalizacji kosztów i rozmiarów stacji. Oprogramowanie kontrolujące
@@ -146,8 +146,8 @@ Systems for measurement of vibrations of buildings, currently offered by
 well-known manufacturers of measuring equipment are quite complicated. This
 project was started with a purpose of building an uncomplicated and affordable
 system able to measure and analyse buildings' vibrations in accordance with the
-PN-B 02170:2016-12 standard. As a base for the system a Raspberry Pi®
-microcomputer was chosen, and, as for the accelerometer, a MEMS-based one was
+PN-B 02170:2016-12 standard. As a base for the system a~Raspberry Pi®
+microcomputer was chosen, and, as for the accelerometer, a~MEMS-based one was
 used to reduce the cost and dimensions of the device. The software that run the
 measurement and analysis was written in the Python programming language with
 necessary libraries. The costruction and launch of the device is to be a step
@@ -178,7 +178,7 @@ jednak pewne dokumenty normatywne pozwalają na określenie wpływu drgań oraz
 weryfikację pomiarową i późniejsze porównania, czy też odniesienie wyników
 do wartości dopuszczalnych. Norma PN-B 02170:2016-12 pod tytułem ,,Ocena
 szkodliwości drgań przekazywanych przez podłoże na budynki'' \cite{norma}
-zawiera przede wszystkim metodykę oceny wpływu drgań, ale można w niej
+zawiera przede wszystkim metodykę oceny wpływu drgań, ale można w~niej
 znaleźć również unormowane zasady wykonywania pomiarów.
 
 \section{Przegląd dostępnych rozwiązań}
@@ -193,7 +193,7 @@ pomiarowych. Do tej pory dominującym podejściem pomiarowym drgań oraz hałasu
 jest wykorzystanie analogowego przetwornika będącego osobnym elementem toru
 pomiarowego. Sygnał analogowy jest przesyłany z reguły do karty pomiarowej, a
 następnie, pod postacią cyfrową, trafia do komputera który jest odpowiedzialny
-za jego analizę. W wielu przypadkach duża dokładność pomiaru wymusza
+za jego analizę. W~wielu przypadkach duża dokładność pomiaru wymusza
 zastosowanie profesjonalnych, wyspecjalizowanych przetworników, ale niekiedy
 zdarza się, że sygnał pomiarowy nie wymaga bardzo dużej rozdzielczości lub
 częstotliwości próbkowania. Podejmowano już pracę nad stworzeniem systemów
@@ -215,7 +215,7 @@ sygnału drgań mierzonego na potrzeby normy określają następujące parametry
   \item Amplituda przyspieszenia drgań od \SI{e-3}{\metre\per\square\second} do \SI{10}{\metre\per\square\second}
 \end{itemize}
 Norma wskazuje również na posiadanie możliwości zapisu w pamięci urządzenia
-zarejestrowanych wibrogramów. Analiza powinna być prowadzona w pasmach
+zarejestrowanych wibrogramów. Analiza powinna być prowadzona w~pasmach
 tercjowych. W procesie przetwarzania i analizy sygnału wykorzystano wyłącznie
 biblioteki na licencji wolnego oprogramowania, a cały kod napisany podczas jego
 realizacji umieszczono na platformie
@@ -271,7 +271,7 @@ sygnału przerwania (I1), której działanie zostanie opisane później.
 \end{figure}
 
 Od strony mikrokomputera Raspberry Pi obsługę wyżej wymienionych linii zapewnia
-panel GPIO (General Purpose Input Output). Znajdują się w nim piny zasilające,
+panel GPIO (General Purpose Input Output). Znajdują się w~nim piny zasilające,
 uziemienia, piny dedykowanych do konkretnych protokołów komunikacji, w tym
 I\textsuperscript{2}C, i piny których przeznaczenie nie jest ustalone.  Na
 poziomie oprogramowania do obsługi komunikacji przez wybrany protokół pomocny
@@ -362,11 +362,11 @@ funkcja, która informuje wątek akwizycji o dostępności nowych danych.
 
 Po inicjalizacji ustawień uruchamiany jest wątek akwizycji danych oraz proces,
 który się zajmuje ich zapisywaniem. Wątek akwizycji czeka na informację o
-dostępności nowych danych po czym odczytuje wszystkie próbki z kolejki
+dostępności nowych danych po czym odczytuje wszystkie próbki z~kolejki
 wykorzystując do tego wspomniany wcześniej tryb \emph{burst}, a następnie
 zebrane wartości przekazuje do kolejki. Na dane w kolejce czeka proces
 zapisujący, który po zebraniu odpowiedniej liczby próbek, która w tym momencie
-odpowiada pięciu minutom, przeprowadza zamianę uzyskanych wartości z kodu
+odpowiada pięciu minutom, przeprowadza zamianę uzyskanych wartości z~kodu
 uzupełnień do dwóch na liczbę całkowitą ze znakiem, po czym uzyskaną macierz
 zawierającą dane ze wszystkich osi zapisuje do plik HDF5 w grupach
 odpowiadających dacie i godzinie zapisu. Wybrano format HDF5 z powodu na jego
@@ -393,7 +393,7 @@ uniwersalność oraz wygodę wewnętrznej struktury (Rys. \ref{fig:struc}).
 
 Stacja pomiarowa jest zdolna do zapisania w swojej pamięci wewnętrznej około
 miesiąca wibrogramu. Ponieważ norma wymaga analizy tercjowej drgań, uwzględniono
-filtrację sygnału w pasmach od \SI{0,5}{\hertz} do \SI{100}{\hertz}. W celu
+filtrację sygnału w pasmach od \SI{0,5}{\hertz} do \SI{100}{\hertz}. W~celu
 weryfikacji działania stacji umieszczono ją w budynku D1 należącym do Katedry
 Mechaniki i Wibroakustyki AGH oraz uruchomiono na 18 godzin. Zdjęcia
 \ref{fig:pomiar1} oraz \ref{fig:imadlo} przedstawiają stację ustawioną do
@@ -473,7 +473,7 @@ mogą pojawiać się w samych przetwornikach drgań. Niestety rynek modułów
 rozszerzeń opartych na akcelerometrach MEMS jest skierowany na zastosowania inne
 niż pomiarowe, często nie wymagające zwiększonej dokładności odwzorowania
 rzeczywistego przebiegu wibracji. Pomimo trudności napotkanych podczas pomiarów
-drgań o niskich amplitudach, skonstruowany system może być wykorzystywany w
+drgań o~niskich amplitudach, skonstruowany system może być wykorzystywany w~%
 charakterze informacyjnym. Z zakresu pomiarowego wskazanego w normie można
 wnioskować, że jeżeli wystąpią drgania o amplitudach zagrażających budynkom,
 skonstruowana stacja pomiarowa będzie w stanie je zmierzyć.
