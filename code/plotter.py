@@ -142,10 +142,30 @@ def plot5():
     plt.legend("PCB")
     plt.savefig('../prez/sens.pdf')
 
+def plot6():
+    # Ulice
+    with h5.File('./pomiar/data.h5','r') as f:
+        data_rey = toint(dataread(f, "2018", "04", "06", "13", [32,36]))
+        data_maj = toint(dataread(f, "2018", "04", "06", "13", [42,46]))
+
+    data_rey = data_rey[15*800:205*800]
+    t1 = gent(len(data_rey))
+    t2 = gent(len(data_maj))
+    plt.figure()
+    plt.plot(t1, data_rey[:,2])
+    plt.savefig('../prez/ul_rey.pdf')
+    plt.figure()
+    plt.plot(t2, data_maj)
+    plt.savefig('../prez/ul_maj.pdf')
+
+
+    
+
 {# This works!
     '1': plot1,
     '2': plot2,
     '3': plot3,
     '4': plot4,
     '5': plot5,
+    '6': plot6,
 }[sys.argv[1]]()
