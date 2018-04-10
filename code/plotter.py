@@ -12,6 +12,7 @@ import sys
 import re
 import os
 import platform
+import io
 
 if platform.system() == 'Windows':
     locale.setlocale(locale.LC_NUMERIC, 'Polish')
@@ -28,6 +29,7 @@ max_val = 2**(bits-1)
 fs = 800
 def toint(d): return d/max_val*mrange*gravity
 def rms(d): return np.sqrt(np.mean(np.square(d)))
+def gent(N, fs=800): return np.array(range(0,N,1))/fs
 
 mpl.use("pgf")
 
@@ -40,17 +42,14 @@ def plot1():
     with h5.File('data.h5','r') as f:
         data = toint(dataread(f, "2018", '03', '23', '07'))
 
-    N = len(data[:,0])
-    t = np.array(range(0,N,1))
-    t = t/fs
-
     plot_N = 1000
+    t = gent(plot_N)
 
     for i in range(0,3):
         plt.figure()
         plt.xlabel(r'Czas [\si{\second}]')
         plt.ylabel(r'Przyspieszenie drgań [\si{\meter\per\second\squared}]')
-        plt.plot(t[0:plot_N], acc[0:plot_N,i])
+        plt.plot(t, acc[0:plot_N,i])
         plt.savefig('../artykul/plots/accel_' + axes[i] + ".pgf")
 
 def plot2():
@@ -80,12 +79,13 @@ def plot3():
 
     plot_S = 1400
     plot_E = 6700
+    t = gent(plot_E-plot_S)
 
     plt.figure()
     plt.xlabel(r'Czas [\si{\second}]')
     plt.ylabel(r'Przyspieszenie drgań [\si{\meter\per\second\squared}]')
     for i in range(0,3):
-        plt.plot(t[plot_S:plot_E], acc2[plot_S:plot_E,i])
+        plt.plot(t, acc2[plot_S:plot_E,i])
     plt.legend(["oś " + ax for ax in axes])
     plt.savefig('../artykul/plots/accel_2_xyz.pgf')
 
@@ -116,13 +116,36 @@ def plot4():
     plt.ylabel(r'Róznica [\si{\decibel}]')
     plt.savefig('../prez/char.pdf')
 
+def plot5():
+    # Czułość
+    with h5.File('./Rasp/data.frqamp.h5','r') as f:
+        data_mems = toint(dataread(f, "2018", "04", "06", "12", "43")[:,1])
+    data_mems -= np.mean(data_mems)
+    s = open('./NI/sensitivity.txt').read().replace(',','.')
+    data_ni = np.loadtxt(io.StringIO(s))
+    data_ni -= np.mean(data_ni)
 
-
-
+    plt.figure()
+    plt.xlabel(r'Czas [\si{\second}]')
+    plt.ylabel(r'Przyspieszenie drgań [\si{\meter\per\second\squared}]')
+    t1 = gent(len(data_mems))
+    t2 = gent(len(data_ni), fs=10240)
+    plt.subplot(211)
+    plt.plot(t1,data_mems)
+    plt.xlim(25, 27)
+    plt.ylim(-0.1,0.1)
+    plt.legend("MEMS")
+    plt.subplot(212)
+    plt.plot(t2,data_ni)
+    plt.xlim(26.20, 28.20)
+    plt.ylim(-0.1,0.1)
+    plt.legend("PCB")
+    plt.savefig('../prez/sens.pdf')
 
 {# This works!
     '1': plot1,
     '2': plot2,
     '3': plot3,
     '4': plot4,
+    '5': plot5,
 }[sys.argv[1]]()
