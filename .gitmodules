@@ -1,3 +1,6 @@
 [submodule "code/mma8451"]
 	path = code/mma8451
 	url = git@github.com:Ashymad/python-mma8451
+[submodule "prez/beamer-AGH"]
+	path = prez/beamer-AGH
+	url = https://github.com/polaksta/beamer-AGH

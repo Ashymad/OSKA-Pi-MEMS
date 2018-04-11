@@ -56,7 +56,7 @@ def plot2():
     # Wyniki pomiaru w D-1 w postaci tercji
     with h5.File('data.h5','r') as f:
         acc = toint(dataread(f, "2018", '03', '23', '07'))
-    frq = acoustics.signal.OctaveBand(fstart=0.5, fstop=350, fraction=3)
+    frq = acoustics.signal.OctaveBand(fstart=0.5, fstop=100, fraction=3)
     filtbank = acoustics.signal.Filterbank(frq, sample_frequency=fs)
     frq_rng = [str(s).replace('.', ',') for s in np.round(frq.nominal, 14)]
     bar_width = 0.9
@@ -114,7 +114,7 @@ def plot4():
     plt.xticks(lin, frq, rotation=70)
     plt.xlabel(r'Częstotliwości badane [\si{\hertz}]')
     plt.ylabel(r'Róznica [\si{\decibel}]')
-    plt.savefig('../prez/char.pdf')
+    plt.savefig('../prez/plots/char.pgf')
 
 def plot5():
     # Czułość
@@ -140,7 +140,7 @@ def plot5():
     plt.xlim(26.20, 28.20)
     plt.ylim(-0.1,0.1)
     plt.legend("PCB")
-    plt.savefig('../prez/sens.pdf')
+    plt.savefig('../prez/plots/sens.pgf')
 
 def plot6():
     # Ulice
@@ -154,10 +154,10 @@ def plot6():
     t2 = gent(len(data_maj))
     plt.figure()
     plt.plot(t1, data_rey[:,2])
-    plt.savefig('../prez/ul_rey.pdf')
+    plt.savefig('../prez/plots/ul_rey.pgf')
     plt.figure()
     plt.plot(t2, data_maj[:,2])
-    plt.savefig('../prez/ul_maj.pdf')
+    plt.savefig('../prez/plots/ul_maj.pgf')
 
 
     

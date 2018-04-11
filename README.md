@@ -16,6 +16,6 @@ analizujący drgania na większym obszarze.
 
 ### Licencjonowanie
 Kod, znajdujący się w folderze "code", zawarty w tym repozytorium jest objęty Licencją Apache w wersji 2 (patrz plik code/LICENSE),
-natomiast pliki źródłowe artykułu z folderu "artykul" są objęte licencją Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 (patrz plik artykul/LICENSE).
+natomiast pliki artykułu i prezentacji z folderów "artykul" i "prez" są objęte licencją Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 (patrz plik artykul/LICENSE).
 
 ![Creative Commons License](https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png)
