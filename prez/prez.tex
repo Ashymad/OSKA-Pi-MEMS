@@ -1,9 +1,27 @@
 \documentclass[aspectratio=1610,polish]{beamer} %If you want to create Polish presentation, replace 'english' with 'polish' and uncomment 3-th line, i.e., '\usepackage{polski}'
-%\usepackage[utf8]{inputenc} %Only needed fot pdflatex
-\usepackage{polski} %Uncomment for Polish language
-\usepackage{babel}
+\usepackage[utf8]{inputenc} %Only needed fot pdflatex
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+\usepackage{polski}
+\usepackage[english,polish]{babel}
+\frenchspacing
+
 \usepackage{listings} %We want to put listings
 \usepackage{siunitx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{csquotes}
+\DeclareQuoteAlias{croatian}{polish}
+
+\usepackage[%
+style=numeric,
+sorting=none,
+language=autobib,
+autolang=other,
+backend=biber,
+]{biblatex}
+
+\addbibresource{../artykul/bibliografia.bib}
 
 \mode<beamer>{ 	%in 'beamer' mode
   \hypersetup{pdfpagemode=FullScreen}		%Enable Full screen mode
@@ -89,6 +107,7 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
   \maketitle
   %%%%%%%%%%%%%%%%
   \begin{frame}{Wibroakustyczna systemy pomiarowe}
+    Odnośnik\cite{norma}
 
   \end{frame}
   %%%%%%%%%%%%%%%%
@@ -125,9 +144,7 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
   \end{frame}
   %%%%%%%%%%%%%%%%
   \begin{frame}[allowframebreaks]{Bibliografia}
-    \begin{thebibliography}{9}
-    
-    \end{thebibliography}
+    \printbibliography
   \end{frame}
 \end{document}
 
