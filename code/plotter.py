@@ -149,13 +149,14 @@ def plot6():
         data_maj = toint(dataread(f, "2018", "04", "06", "13", [42,46]))
 
     data_rey = data_rey[15*800:205*800]
+    data_maj = data_maj[160*800:len(data_maj)-1]
     t1 = gent(len(data_rey))
     t2 = gent(len(data_maj))
     plt.figure()
     plt.plot(t1, data_rey[:,2])
     plt.savefig('../prez/ul_rey.pdf')
     plt.figure()
-    plt.plot(t2, data_maj)
+    plt.plot(t2, data_maj[:,2])
     plt.savefig('../prez/ul_maj.pdf')
 
 
