@@ -1,5 +1,5 @@
 \documentclass[aspectratio=1610,polish]{beamer} %If you want to create Polish presentation, replace 'english' with 'polish' and uncomment 3-th line, i.e., '\usepackage{polski}'
-\usepackage[utf8]{inputenc}
+%\usepackage[utf8]{inputenc} %Only needed fot pdflatex
 \usepackage{polski} %Uncomment for Polish language
 \usepackage{babel}
 \usepackage{listings} %We want to put listings
@@ -25,13 +25,15 @@
   \frame{\partpage}
 } 
 
-\title{AGH Beamer Theme}
-\author{Stanisław Polak, \\Gonciarz Bumcyfykszy}
-\date{\today}
-\institute[AGH]{
-  Institute of Computer Science\\ul. Kawiory 21\\30-055 Kraków\\
-  Poland\\
-  \url{http://www.icsr.agh.edu.pl/~polak/}
+\title[Wibroakustyczna stacja pomiarowa]{%
+Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
+\author[S. Mikulicz, M. Piszak]{Szymon Mikulicz\\Marcel Piszak}
+\date{2018-04-13}
+\institute[AGH]{%
+  Koło Naukowe Informatyki w Wibroakustyce\\
+  ,,LabAcoustics''\\
+  \url{http://www.labacoustics.agh.edu.pl}\\
+  Opiekun: dr inż. Paweł Pawlik
 }
 %%%%%%%%%%% Configuration of the listings package %%%%%%%%%%%%%%%%%%%%%%%%%%
 % Source: https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings#Using_the_listings_package
