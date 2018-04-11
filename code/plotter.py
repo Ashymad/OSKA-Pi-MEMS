@@ -40,7 +40,7 @@ axes = ['x', 'y', 'z']
 def plot1():
     # Przebieg czasowy pomiaru w D-1
     with h5.File('data.h5','r') as f:
-        data = toint(dataread(f, "2018", '03', '23', '07'))
+        acc = toint(dataread(f, "2018", '03', '23', '07'))
 
     plot_N = 1000
     t = gent(plot_N)
@@ -55,7 +55,7 @@ def plot1():
 def plot2():
     # Wyniki pomiaru w D-1 w postaci tercji
     with h5.File('data.h5','r') as f:
-        data = toint(dataread(f, "2018", '03', '23', '07'))
+        acc = toint(dataread(f, "2018", '03', '23', '07'))
     frq = acoustics.signal.OctaveBand(fstart=0.5, fstop=350, fraction=3)
     filtbank = acoustics.signal.Filterbank(frq, sample_frequency=fs)
     frq_rng = [str(s).replace('.', ',') for s in np.round(frq.nominal, 14)]
@@ -75,7 +75,7 @@ def plot2():
 def plot3():
     # Pomiar obratu w ręce
     with h5.File('data2.h5','r') as f:
-        data2 = toint(dataread(f, "2018"))
+        acc2 = toint(dataread(f, "2018"))
 
     plot_S = 1400
     plot_E = 6700
