@@ -3,6 +3,7 @@
 \usepackage{polski} %Uncomment for Polish language
 \usepackage{babel}
 \usepackage{listings} %We want to put listings
+\usepackage{siunitx}
 
 \mode<beamer>{ 	%in 'beamer' mode
   \hypersetup{pdfpagemode=FullScreen}		%Enable Full screen mode
@@ -104,11 +105,15 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
   \end{frame}
   %%%%%%%%%%%%%%%%
   \begin{frame}{Przykładowe wyniki}
-
+    \begin{figure}
+      \input{plots/char.pgf}
+    \end{figure}
   \end{frame}
   %%%%%%%%%%%%%%%%
   \begin{frame}{Przykładowe wyniki c.d.}
-
+    \begin{figure}
+      \input{plots/ul_maj.pgf}
+    \end{figure}
   \end{frame}
   %%%%%%%%%%%%%%%%
   \begin{frame}{Podsumowanie realizacji}

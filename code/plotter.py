@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
 import h5py as h5
-import acoustics
 import numpy as np
-import matplotlib.pyplot as plt
 import matplotlib as mpl
+mpl.use("pgf")
+import matplotlib.pyplot as plt
+from acoustics.signal import OctaveBand, Filterbank
 from scipy.constants import g as gravity
 from mma8451.files import dataread
 import locale
@@ -31,10 +32,8 @@ def toint(d): return d/max_val*mrange*gravity
 def rms(d): return np.sqrt(np.mean(np.square(d)))
 def gent(N, fs=800): return np.array(range(0,N,1))/fs
 
-mpl.use("pgf")
 
 axes = ['x', 'y', 'z']
-
 
 
 def plot1():
@@ -56,8 +55,8 @@ def plot2():
     # Wyniki pomiaru w D-1 w postaci tercji
     with h5.File('data.h5','r') as f:
         acc = toint(dataread(f, "2018", '03', '23', '07'))
-    frq = acoustics.signal.OctaveBand(fstart=0.5, fstop=100, fraction=3)
-    filtbank = acoustics.signal.Filterbank(frq, sample_frequency=fs)
+    frq = OctaveBand(fstart=0.5, fstop=100, fraction=3)
+    filtbank = Filterbank(frq, sample_frequency=fs)
     frq_rng = [str(s).replace('.', ',') for s in np.round(frq.nominal, 14)]
     bar_width = 0.9
 
@@ -109,7 +108,7 @@ def plot4():
     frq = np.append(np.arange(15, 106, 10),np.arange(150, 400, 50))
     bar_width = 0.9
     lin = np.arange(len(data_diff))
-    plt.figure()
+    plt.figure(figsize=(5,3))
     plt.bar(lin, data_diff, bar_width)
     plt.xticks(lin, frq, rotation=70)
     plt.xlabel(r'Częstotliwości badane [\si{\hertz}]')
@@ -125,7 +124,7 @@ def plot5():
     data_ni = np.loadtxt(io.StringIO(s))
     data_ni -= np.mean(data_ni)
 
-    plt.figure()
+    plt.figure(figsize=(5,3))
     plt.xlabel(r'Czas [\si{\second}]')
     plt.ylabel(r'Przyspieszenie drgań [\si{\meter\per\second\squared}]')
     t1 = gent(len(data_mems))
@@ -150,14 +149,15 @@ def plot6():
 
     data_rey = data_rey[15*800:205*800]
     data_maj = data_maj[160*800:len(data_maj)-1]
-    t1 = gent(len(data_rey))
-    t2 = gent(len(data_maj))
-    plt.figure()
-    plt.plot(t1, data_rey[:,2])
-    plt.savefig('../prez/plots/ul_rey.pgf')
-    plt.figure()
-    plt.plot(t2, data_maj[:,2])
-    plt.savefig('../prez/plots/ul_maj.pgf')
+    t = (gent(len(data_rey)), gent(len(data_maj)))
+    names = ("ul_rey", "ul_maj")
+    data = (data_rey, data_maj)
+    for it in (0,1):
+        plt.figure(figsize=(5,3))
+        plt.plot(t[it], data[it][:,2])
+        plt.xlabel(r'Czas [\si{\second}]')
+        plt.ylabel(r'Przyspieszenie drgań [\si{\meter\per\second\squared}]')
+        plt.savefig('../prez/plots/' + names[it] + '.pgf')
 
 
     
