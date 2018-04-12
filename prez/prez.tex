@@ -7,7 +7,7 @@
 \frenchspacing
 
 \usepackage{listings} %We want to put listings
-\usepackage{siunitx}
+\usepackage[binary-units]{siunitx}
 \sisetup{output-decimal-marker = {,}}
 \usepackage{icomma}
 \usepackage{pgfplots}
@@ -21,6 +21,7 @@
 }
 
 \usepackage{import}
+\usepackage{dirtree}
 
 \usepackage[%
 style=numeric,
@@ -87,7 +88,7 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
   showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
   showstringspaces=false,          % underline spaces within strings only
   showtabs=false,                  % show tabs within strings adding particular underscores
-  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
   stringstyle=\color{cyan},        % string literal style
   tabsize=2,	                   % sets default tabsize to 2 spaces
   title=\lstname,                  % show the filename of files included with \lstinputlisting; also try caption instead of title
@@ -138,7 +139,7 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
   %%%%%%%%%%%%%%%%
   \begin{frame}{Założenia projektowe}
     \begin{itemize}
-      \item Pomiary zgodne z normą PN-B 02170:2016-12.
+      \item Pomiary zgodne z normą PN-B 02170:2016-12
       \item Pasmo częstotliwości od \SI{0.5}{\hertz} do \SI{100}{\hertz}
       \item Amplituda przyspieszenia drgań od
 	\SI{e-3}{\metre\per\square\second} do \SI{10}{\metre\per\square\second}
@@ -172,7 +173,8 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
 	\item Protokół transmisji danych -- I\textsuperscript{2}C (SDA -- dane,
 	  SCL -- zegar)
 	\item Częstotliwość próbkowania -- \SI{800}{\hertz}
-	\item Zakres pomiarowy -- $\pm\SI{2}{\g}$
+  \item Zakres pomiarowy -- $\pm\SI{2}{\g}$
+  \item Rozdzielczość bitowa -- \SI{14}{\bit}
       \end{itemize}
       \column{0.59\textwidth}
       \begin{figure}
@@ -182,14 +184,79 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
     \end{columns}
   \end{frame}
   %%%%%%%%%%%%%%%%
+  \begin{frame}{Opis programu sterującego}
+    \begin{columns}
+      \column{0.59\textwidth}
+      \begin{itemize}
+        \item Komunikacja z urządzeniem poprzez odczyt z i zapis do rejestrów
+        \item Wykorzystanie wewnętrznej kolejki FIFO akcelerometru (\SI{32}{\bit})
+        \item Wysyłka sygnału przerwania w momencie zapełnienia połowy kolejki
+        \item Akumulacja wyników z wybranego okresu
+        \item Zapis wibrogramu do pliku HDF5
+      \end{itemize}
+      \column{0.4\textwidth}
+      \begin{figure}
+      \begin{minipage}{\textwidth}
+      \dirtree{%
+      .1 <rok>/.
+      .2 <miesiąc>/.
+      .3 <dzień>/.
+      .4 <godzina>/.
+      .5 <minuta>.
+      .5 \dots.
+      .4 \dots.
+      .3 \dots.
+      .2 \dots.
+      }%
+      \end{minipage}
+      \caption{Struktura pliku z wynikami}
+      \end{figure}
+    \end{columns}
+  \end{frame}
+  %%%%%%%%%%%%%%%%
+  \begin{frame}[fragile]{Fragment kodu}
+    \begin{lstlisting}[language=Python]
+      from mma8451.register import register as REG
+      from mma8451.iic import IIC
+      import pigpio
+  
+      # Inicjalizacja połączenia z procesem pigpio
+      pi = pigpio.pi()
+      # Stwórz obiekt klasy, gdzie 1 do magistrala a 0x1D adres
+      iic = IIC(pi, 1, 0x1D)
+      # Uśpij urządzenie
+      iic.unset_flag(REG.CTRL_REG1.ACTIVE)
+      # Włącz tryb 14-to bitowy
+      iic.unset_flag(REG.CTRL_REG1.F_READ)
+      # Włacz urządzenie do trybu aktywnego
+      iic.set_flag(REG.CTRL_REG1.ACTIVE)
+      # Pobierz dane ze wszystkich trzech osi
+      dane = iic.block_read(REG.OUT_X_MSB, 6)\end{lstlisting}
+  \end{frame}
+  %%%%%%%%%%%%%%%%
+  \begin{frame}{Przeprowadzone testy}
+    \begin{columns}
+      \column{0.48\textwidth}
+      \begin{figure}
+        \includegraphics[width=\textwidth]{bitgraphics/stacja_2.png}
+        \caption{Wyznaczanie charakterystyki}
+      \end{figure}
+      \column{0.48\textwidth}
+      \begin{figure}
+        \includegraphics[width=\textwidth]{bitgraphics/stacja_1.png}
+        \caption{Pomiar kontrolny}
+      \end{figure}
+    \end{columns}
+  \end{frame}
+  %%%%%%%%%%%%%%%%
   \section{Wyniki}
-  \begin{frame}{Przykładowe wyniki}
+  \begin{frame}{Charakterystyka akcelerometru}
     \begin{figure}
       \input{plots/char.pgf}
     \end{figure}
   \end{frame}
   %%%%%%%%%%%%%%%%
-  \begin{frame}{Przykładowe wyniki c.d.}
+  \begin{frame}{Wibrogram przejeżdżających tramwajów}
     \begin{figure}
       \input{plots/ul_maj.pgf}
     \end{figure}
