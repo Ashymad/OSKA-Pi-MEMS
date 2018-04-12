@@ -2,16 +2,23 @@
 \usepackage[utf8]{inputenc} %Only needed fot pdflatex
 \usepackage[T1]{fontenc}
 \usepackage{indentfirst}
-\usepackage{polski}
 \usepackage[english,polish]{babel}
+\usepackage{polski}
 \frenchspacing
 
 \usepackage{listings} %We want to put listings
 \usepackage{siunitx}
+\sisetup{output-decimal-marker = {,}}
+\usepackage{icomma}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.15}
 \usepackage{csquotes}
 \DeclareQuoteAlias{croatian}{polish}
+
+\AtBeginDocument{
+  \renewcommand{\tablename}{Tablica}
+  \renewcommand{\figurename}{Rysunek}
+}
 
 \usepackage[%
 style=numeric,
@@ -128,11 +135,33 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
   \end{frame}
   %%%%%%%%%%%%%%%%
   \begin{frame}{Założenia projektowe}
-
+    \begin{itemize}
+      \item Pomiary zgodne z normą PN-B 02170:2016-12.
+      \item Pasmo częstotliwości od \SI{0.5}{\hertz} do \SI{100}{\hertz}
+      \item Amplituda przyspieszenia drgań od
+	\SI{e-3}{\metre\per\square\second} do \SI{10}{\metre\per\square\second}
+      \item Możliwość zapisu w pamięci urządzenia zarejestrowanych wibrogramów
+    \end{itemize}
   \end{frame}
   %%%%%%%%%%%%%%%%
   \section{Realizacja}
-  \begin{frame}{Realizacja}
+  \begin{frame}{Konstrukcja stacji pomiarowej}
+    \centering
+    \begin{columns}
+      \column{0.45\textwidth}
+      \begin{itemize}
+	\item Raspberry Pi 3 model B
+	\item Karta pamięci microSD 16GB
+	\item Moduł akcelerometru MEMS Adafruit MMA8451
+	\item Kable połączeniowe
+	\item Zasilacz
+      \end{itemize}
+      \column{0.5\textwidth}
+      \begin{figure}
+	\includegraphics[width=\textwidth]{../artykul/bitgraphics/pi.png}
+	\caption{Prototyp stacji pomiarowej}
+      \end{figure}
+    \end{columns}
 
   \end{frame}
   %%%%%%%%%%%%%%%%
