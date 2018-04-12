@@ -117,7 +117,7 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
   \maketitle
   %%%%%%%%%%%%%%%%
   \section{Informacje wstępne}
-  \begin{frame}{Wibroakustyczna systemy pomiarowe -- przegląd rozwiązań}
+  \begin{frame}{Wibroakustyczna systemy pomiarowe}
     \centering
     \begin{columns}
       \column{0.45\textwidth}
@@ -128,7 +128,7 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
 	\item Komputer z oprogramowaniem producenta do odczytu i zapisu danych
       \end{itemize}
       \column{0.45\textwidth}
-      Podejście niekonwencjonalne:
+      Podejście proponowane:
       \begin{itemize}
 	\item Cyfrowy moduł z akcelerometrem typu MEMS oraz przetwornikiem A/C
 	\item Komputer Raspberry Pi z otwartym oprogramowaniem dostosowanym do
@@ -264,16 +264,42 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
   %%%%%%%%%%%%%%%%
   \section{Podsumowanie}
   \begin{frame}{Podsumowanie realizacji}
-
+    \begin{itemize}
+      \item Na podstawie danych zarejestrowanych przez stację można określić w której strefie zagrożenia znajduje się budynek
+      \item W zakresie pomiarowych charakterystyka akcelerometru jest porównywalna z rozwiązaniami komercyjnymi
+      \item Mały odstęp sygnału od szumu urządzenia ogranicza jego zastosowania
+    \end{itemize}
   \end{frame}
   %%%%%%%%%%%%%%%%
   \begin{frame}{Dalsze prace}
-
+    \begin{columns}
+      \column{0.4\textwidth}
+      \begin{itemize}
+        \item Zastosowanie dokładniejszych akcelerometrów
+        \item Rozszerzenie stacji o funkcjonalność pomiaru hałasu (mikrofony MEMS)
+        \item Rozszerzenie oprogramowania o funkcjonalność sieciową
+        \item Połączenie wielu stacji pomiarowych w rozproszony system korzystający z technologii IoT
+      \end{itemize}
+      \column{0.59\textwidth}
+      Tu znajdze się zdjęcie akcelerometru z obudową
+    \end{columns} 
   \end{frame}
   %%%%%%%%%%%%%%%%
-  \begin{frame}[allowframebreaks]{Bibliografia}
+  \begin{frame}{Bibliografia}
     \nocite{*}
     \printbibliography
+  \end{frame}
+  %%%%%%%%%%%%%%%%
+  \begin{frame}
+    \centering
+    \vspace*{40pt}
+
+    {\huge Dziękujemy za uwagę}
+    \vspace*{20pt}
+
+    Projekt dostępny pod adresem:\\
+    \url{https://github.com/Ashymad/OSKA-Pi-MEMS}
+    \url{https://github.com/Ashymad/python-mma8451}
   \end{frame}
 \end{document}
 

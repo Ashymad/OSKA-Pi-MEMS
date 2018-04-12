@@ -108,11 +108,12 @@ def plot4():
     frq = np.append(np.arange(15, 106, 10),np.arange(150, 400, 50))
     bar_width = 0.9
     lin = np.arange(len(data_diff))
+    mpl.rcParams['font.family'] = 'sans'
     plt.figure(figsize=(5,3))
     plt.bar(lin, data_diff, bar_width)
     plt.xticks(lin, frq, rotation=70)
     plt.xlabel(r'Częstotliwości badane [\si{\hertz}]')
-    plt.ylabel(r'Róznica [\si{\decibel}]')
+    plt.ylabel(r'Względny poziom przyspieszenia [\si{\decibel}]')
     plt.savefig('../prez/plots/char.pgf')
 
 def plot5():
@@ -124,6 +125,7 @@ def plot5():
     data_ni = np.loadtxt(io.StringIO(s))
     data_ni -= np.mean(data_ni)
 
+    mpl.rcParams['font.family'] = 'sans'
     plt.figure(figsize=(5,3))
     plt.xlabel(r'Czas [\si{\second}]')
     plt.ylabel(r'Przyspieszenie drgań [\si{\meter\per\second\squared}]')
@@ -152,6 +154,7 @@ def plot6():
     t = (gent(len(data_rey)), gent(len(data_maj)))
     names = ("ul_rey", "ul_maj")
     data = (data_rey, data_maj)
+    mpl.rcParams['font.family'] = 'sans'
     for it in (0,1):
         plt.figure(figsize=(5,3))
         plt.plot(t[it], data[it][:,2])
