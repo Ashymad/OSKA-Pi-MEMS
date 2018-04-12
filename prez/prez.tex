@@ -20,6 +20,8 @@
   \renewcommand{\figurename}{Rysunek}
 }
 
+\usepackage{import}
+
 \usepackage[%
 style=numeric,
 sorting=none,
@@ -146,9 +148,8 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
   %%%%%%%%%%%%%%%%
   \section{Realizacja}
   \begin{frame}{Konstrukcja stacji pomiarowej}
-    \centering
     \begin{columns}
-      \column{0.45\textwidth}
+      \column{0.4\textwidth}
       \begin{itemize}
 	\item Raspberry Pi 3 model B
 	\item Karta pamięci microSD 16GB
@@ -156,16 +157,16 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
 	\item Kable połączeniowe
 	\item Zasilacz
       \end{itemize}
-      \column{0.5\textwidth}
+      \column{0.59\textwidth}
       \begin{figure}
-	\includegraphics[width=\textwidth]{../artykul/bitgraphics/pi.png}
-	\caption{Prototyp stacji pomiarowej}
+	\import{vecgraphics/}{schemat.pdf_tex}
+	\caption{Schemat stacji pomiarowej}
       \end{figure}
     \end{columns}
 
   \end{frame}
   %%%%%%%%%%%%%%%%
-  \begin{frame}{Realizacja c.d.}
+  \begin{frame}{}
 
   \end{frame}
   %%%%%%%%%%%%%%%%
