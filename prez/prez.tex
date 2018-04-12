@@ -106,15 +106,32 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
 \begin{document}
   \maketitle
   %%%%%%%%%%%%%%%%
-  \begin{frame}{Wibroakustyczna systemy pomiarowe}
-    Odnośnik
-
+  \section{Informacje wstępne}
+  \begin{frame}{Wibroakustyczna systemy pomiarowe -- przegląd rozwiązań}
+    \centering
+    \begin{columns}
+      \column{0.45\textwidth}
+      Podejście klasyczne:
+      \begin{itemize}
+	\item Analogowy akcelerometr pomiarowy uznanej firmy (np. PCB)
+	\item Karta pomiarowa z niskoszumowym przetwornikiem A/C
+	\item Komputer z oprogramowaniem producenta do odczytu i zapisu danych
+      \end{itemize}
+      \column{0.45\textwidth}
+      Podejście niekonwencjonalne:
+      \begin{itemize}
+	\item Cyfrowy moduł z akcelerometrem typu MEMS oraz przetwornikiem A/C
+	\item Komputer Raspberry Pi z otwartym oprogramowaniem dostosowanym do
+	  odczytu i zapisu danych
+      \end{itemize}
+    \end{columns}
   \end{frame}
   %%%%%%%%%%%%%%%%
   \begin{frame}{Założenia projektowe}
 
   \end{frame}
   %%%%%%%%%%%%%%%%
+  \section{Realizacja}
   \begin{frame}{Realizacja}
 
   \end{frame}
@@ -123,6 +140,7 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
 
   \end{frame}
   %%%%%%%%%%%%%%%%
+  \section{Wyniki}
   \begin{frame}{Przykładowe wyniki}
     \begin{figure}
       \input{plots/char.pgf}
@@ -135,6 +153,7 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
     \end{figure}
   \end{frame}
   %%%%%%%%%%%%%%%%
+  \section{Podsumowanie}
   \begin{frame}{Podsumowanie realizacji}
 
   \end{frame}
