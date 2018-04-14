@@ -113,7 +113,7 @@ def plot4():
     plt.bar(lin, data_diff, bar_width)
     plt.xticks(lin, frq, rotation=70)
     plt.xlabel(r'Częstotliwości badane [\si{\hertz}]')
-    plt.ylabel(r'Względny poziom przyspieszenia [\si{\decibel}]')
+    plt.ylabel(r'Poziom przyspieszenia [\si{\decibel}]')
     plt.savefig('../prez/plots/char.pgf')
 
 def plot5():
