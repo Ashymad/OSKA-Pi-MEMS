@@ -192,7 +192,10 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
         \item Komunikacja z urządzeniem poprzez odczyt z i zapis do rejestrów
         \item Wykorzystanie wewnętrznej kolejki FIFO akcelerometru (32 próbki w trzech osiach)
         \item Wysyłka sygnału przerwania w momencie zapełnienia połowy kolejki
-        \item Akumulacja wyników z wybranego okresu
+        \item Akumulacja wyników z wybranego okresu w pliku HDF5, lub
+	  przesyłanie ich do brokera AMQP RabbitMQ.
+	\item Wizualizacja danych pomiarowych w aplikacji sieciowej klienta z
+	  wykorzystaniem biblioteki D3.js
       \end{itemize}
     %   \column{0.4\textwidth}
     %   \begin{figure}
