@@ -191,7 +191,7 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
       \begin{itemize}
         \item Komunikacja z urządzeniem poprzez odczyt z i zapis do rejestrów
         \item Wykorzystanie wewnętrznej kolejki FIFO akcelerometru (32 próbki w trzech osiach)
-        \item Wysyłka sygnału przerwania w momencie zapełnienia połowy kolejki
+        \item Wysłanie sygnału przerwania w momencie zapełnienia połowy kolejki
         \item Akumulacja wyników z wybranego okresu w pliku HDF5, lub
 	  przesyłanie ich do brokera AMQP RabbitMQ.
 	\item Wizualizacja danych pomiarowych w aplikacji sieciowej klienta z
@@ -242,7 +242,7 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
       \column{0.48\textwidth}
       \begin{figure}
         \includegraphics[width=\textwidth]{bitgraphics/stacja_2.png}
-        \caption{Wyznaczanie charakterystyki}
+        \caption{Wyznaczanie charakterystyki amplitudowo-częstotliwościowej}
       \end{figure}
       \column{0.48\textwidth}
       \begin{figure}
@@ -253,7 +253,7 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
   \end{frame}
   %%%%%%%%%%%%%%%%
   \section{Wyniki}
-  \begin{frame}{Niepewność graniczna akcelerometru}
+  \begin{frame}{Niepewność graniczna akcelerometru (błąd maksymalny)}
     \begin{figure}
       \input{plots/char.pgf}
     \end{figure}
