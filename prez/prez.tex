@@ -57,7 +57,7 @@ backend=biber,
 \title[Wibroakustyczna stacja pomiarowa]{%
 Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
 \author[S. Mikulicz, M. Piszak]{Szymon Mikulicz\\Marcel Piszak}
-\date{2018-04-13}
+\date{2018-05-10}
 \institute[AGH]{%
   Koło Naukowe Informatyki w Wibroakustyce\\
   ,,LabAcoustics''\\
@@ -117,25 +117,25 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
   \maketitle
   %%%%%%%%%%%%%%%%
   \section{Informacje wstępne}
-  \begin{frame}{Wibroakustyczna systemy pomiarowe}
-    \centering
-    \begin{columns}
-      \column{0.45\textwidth}
-      Podejście klasyczne:
-      \begin{itemize}
-	\item Analogowy akcelerometr pomiarowy uznanej firmy (np. PCB)
-	\item Karta pomiarowa z niskoszumowym przetwornikiem A/C
-	\item Komputer z oprogramowaniem producenta do odczytu i zapisu danych
-      \end{itemize}
-      \column{0.45\textwidth}
-      Podejście proponowane:
-      \begin{itemize}
-	\item Cyfrowy moduł z akcelerometrem typu MEMS oraz przetwornikiem A/C
-	\item Komputer Raspberry Pi z otwartym oprogramowaniem dostosowanym do
-	  odczytu i zapisu danych
-      \end{itemize}
-    \end{columns}
-  \end{frame}
+  % \begin{frame}{Wibroakustyczna systemy pomiarowe}
+  %   \centering
+  %   \begin{columns}
+  %     \column{0.45\textwidth}
+  %     Podejście klasyczne:
+  %     \begin{itemize}
+	% \item Analogowy akcelerometr pomiarowy uznanej firmy (np. PCB)
+	% \item Karta pomiarowa z niskoszumowym przetwornikiem A/C
+	% \item Komputer z oprogramowaniem producenta do odczytu i zapisu danych
+  %     \end{itemize}
+  %     \column{0.45\textwidth}
+  %     Podejście proponowane:
+  %     \begin{itemize}
+	% \item Cyfrowy moduł z akcelerometrem typu MEMS oraz przetwornikiem A/C
+	% \item Komputer Raspberry Pi z otwartym oprogramowaniem dostosowanym do
+	%   odczytu i zapisu danych
+  %     \end{itemize}
+  %   \end{columns}
+  % \end{frame}
   %%%%%%%%%%%%%%%%
   \begin{frame}{Założenia projektowe}
     \begin{itemize}
@@ -144,6 +144,7 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
       \item Amplituda przyspieszenia drgań od
 	\SI{e-3}{\metre\per\square\second} do \SI{10}{\metre\per\square\second}
       \item Możliwość zapisu w pamięci urządzenia zarejestrowanych wibrogramów
+      \item Możliwość zdalnego odczytu danych
     \end{itemize}
   \end{frame}
   %%%%%%%%%%%%%%%%
@@ -185,55 +186,54 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
   \end{frame}
   %%%%%%%%%%%%%%%%
   \begin{frame}{Opis programu sterującego}
-    \begin{columns}
-      \column{0.59\textwidth}
+    % \begin{columns}
+    %   \column{0.59\textwidth}
       \begin{itemize}
         \item Komunikacja z urządzeniem poprzez odczyt z i zapis do rejestrów
         \item Wykorzystanie wewnętrznej kolejki FIFO akcelerometru (32 próbki w trzech osiach)
         \item Wysyłka sygnału przerwania w momencie zapełnienia połowy kolejki
         \item Akumulacja wyników z wybranego okresu
-        \item Zapis wibrogramu do pliku HDF5
       \end{itemize}
-      \column{0.4\textwidth}
-      \begin{figure}
-      \begin{minipage}{\textwidth}
-      \dirtree{%
-      .1 <rok>/.
-      .2 <miesiąc>/.
-      .3 <dzień>/.
-      .4 <godzina>/.
-      .5 <minuta>.
-      .5 \dots.
-      .4 \dots.
-      .3 \dots.
-      .2 \dots.
-      }%
-      \end{minipage}
-      \caption{Struktura pliku z wynikami}
-      \end{figure}
-    \end{columns}
+    %   \column{0.4\textwidth}
+    %   \begin{figure}
+    %   \begin{minipage}{\textwidth}
+    %   \dirtree{%
+    %   .1 <rok>/.
+    %   .2 <miesiąc>/.
+    %   .3 <dzień>/.
+    %   .4 <godzina>/.
+    %   .5 <minuta>.
+    %   .5 \dots.
+    %   .4 \dots.
+    %   .3 \dots.
+    %   .2 \dots.
+    %   }%
+    %   \end{minipage}
+    %   \caption{Struktura pliku z wynikami}
+    %   \end{figure}
+    % \end{columns}
   \end{frame}
   %%%%%%%%%%%%%%%%
-  \begin{frame}[fragile]{Fragment kodu}
-    \begin{lstlisting}[language=Python]
-      from mma8451.register import register as REG
-      from mma8451.iic import IIC
-      import pigpio
+  % \begin{frame}[fragile]{Fragment kodu}
+  %   \begin{lstlisting}[language=Python]
+  %     from mma8451.register import register as REG
+  %     from mma8451.iic import IIC
+  %     import pigpio
   
-      # Inicjalizacja połączenia z procesem pigpio
-      pi = pigpio.pi()
-      # Stwórz obiekt klasy, gdzie 1 do magistrala a 0x1D adres
-      iic = IIC(pi, 1, 0x1D)
-      # Uśpij urządzenie
-      iic.unset_flag(REG.CTRL_REG1.ACTIVE)
-      # Włącz tryb 14-to bitowy
-      iic.unset_flag(REG.CTRL_REG1.F_READ)
-      # Włacz urządzenie do trybu aktywnego
-      iic.set_flag(REG.CTRL_REG1.ACTIVE)
-      # Pobierz dane ze wszystkich trzech osi
-      dane = iic.block_read(REG.OUT_X_MSB, 6)\end{lstlisting}
-  \end{frame}
-  %%%%%%%%%%%%%%%%
+  %     # Inicjalizacja połączenia z procesem pigpio
+  %     pi = pigpio.pi()
+  %     # Stwórz obiekt klasy, gdzie 1 do magistrala a 0x1D adres
+  %     iic = IIC(pi, 1, 0x1D)
+  %     # Uśpij urządzenie
+  %     iic.unset_flag(REG.CTRL_REG1.ACTIVE)
+  %     # Włącz tryb 14-to bitowy
+  %     iic.unset_flag(REG.CTRL_REG1.F_READ)
+  %     # Włacz urządzenie do trybu aktywnego
+  %     iic.set_flag(REG.CTRL_REG1.ACTIVE)
+  %     # Pobierz dane ze wszystkich trzech osi
+  %     dane = iic.block_read(REG.OUT_X_MSB, 6)\end{lstlisting}
+  % \end{frame}
+  % %%%%%%%%%%%%%%%%
   \begin{frame}{Przeprowadzone testy}
     \begin{columns}
       \column{0.48\textwidth}
@@ -264,28 +264,28 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
   %%%%%%%%%%%%%%%%
   \section{Podsumowanie}
   \begin{frame}{Podsumowanie realizacji}
-    \begin{itemize}
-      \item Na podstawie danych zarejestrowanych przez stację można określić w której strefie zagrożenia znajduje się budynek
-      \item W zakresie pomiarowych charakterystyka akcelerometru jest porównywalna z rozwiązaniami komercyjnymi
-      \item Mały odstęp sygnału od szumu urządzenia ogranicza jego zastosowania
-    \end{itemize}
-  \end{frame}
-  %%%%%%%%%%%%%%%%
-  \begin{frame}{Dalsze prace}
     \begin{columns}
-      \column{0.49\textwidth}
+      \column{0.59\textwidth}
       \begin{itemize}
-        \item Zastosowanie dokładniejszych akcelerometrów
-        \item Rozszerzenie stacji o funkcjonalność pomiaru hałasu (mikrofony MEMS)
-        \item Rozszerzenie oprogramowania o funkcjonalność sieciową
-        \item Połączenie wielu stacji pomiarowych w rozproszony system korzystający z technologii IoT
+        \item Na podstawie danych zarejestrowanych przez stację można określić w której strefie zagrożenia znajduje się budynek
+        \item W zakresie pomiarowych charakterystyka akcelerometru jest porównywalna z rozwiązaniami komercyjnymi
+        \item Mały odstęp sygnału od szumu urządzenia ogranicza jego zastosowania
+        \item Interfejs sieciowy pozwala na monitorowanie danych
       \end{itemize}
-      \column{0.5\textwidth}
+      \column{0.4\textwidth}
       \begin{figure}
         \includegraphics[width=0.8\textwidth]{bitgraphics/akcel.png}
         \caption{Akcelerometr w obudowie}
       \end{figure}
     \end{columns} 
+  \end{frame}
+  %%%%%%%%%%%%%%%%
+  \begin{frame}{Dalsze prace}
+    \begin{itemize}
+      \item Zastosowanie dokładniejszych akcelerometrów -- stworzenie własnego układu na bazie akcelerometru firmy Kionix oraz przetworników analogowo-cyfrowych firmy Texas Instruments
+      \item Rozszerzenie stacji o funkcjonalność pomiaru hałasu (mikrofony MEMS)
+      \item Połączenie wielu stacji pomiarowych w rozproszony system korzystający z technologii IoT
+    \end{itemize}
   \end{frame}
   %%%%%%%%%%%%%%%%
   \begin{frame}{Bibliografia}

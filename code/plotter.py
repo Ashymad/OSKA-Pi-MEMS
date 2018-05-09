@@ -113,7 +113,7 @@ def plot4():
     plt.bar(lin, data_diff, bar_width)
     plt.xticks(lin, frq, rotation=70)
     plt.xlabel(r'Częstotliwości badane [\si{\hertz}]')
-    plt.ylabel(r'Różnica przyspieszeń [\si{\metre\per\square\second}]')
+    plt.ylabel(r'Niepewność graniczna [\si{\metre\per\square\second}]')
     plt.savefig('../prez/plots/char.pgf')
 
 def plot5():
