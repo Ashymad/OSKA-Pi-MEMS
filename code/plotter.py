@@ -103,7 +103,7 @@ def plot4():
     for file in files:
         data_ni.append(rms(np.loadtxt(path+"/"+file)))
 
-    data_diff = 10*np.log10(np.divide(data_mems,data_ni))
+    data_diff = np.subtract(data_mems, data_ni)
 
     frq = np.append(np.arange(15, 106, 10),np.arange(150, 400, 50))
     bar_width = 0.9
@@ -113,7 +113,7 @@ def plot4():
     plt.bar(lin, data_diff, bar_width)
     plt.xticks(lin, frq, rotation=70)
     plt.xlabel(r'Częstotliwości badane [\si{\hertz}]')
-    plt.ylabel(r'Poziom przyspieszenia [\si{\decibel}]')
+    plt.ylabel(r'Różnica przyspieszeń [\si{\metre\per\square\second}]')
     plt.savefig('../prez/plots/char.pgf')
 
 def plot5():
