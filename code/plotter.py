@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib as mpl
 mpl.use("pgf")
 import matplotlib.pyplot as plt
-from acoustics.signal import OctaveBand, Filterbank
+from acoustics.signal import OctaveBand, Filterbank, lowpass
 from scipy.constants import g as gravity
 from mma8451.files import dataread
 import locale
@@ -48,7 +48,7 @@ def plot1():
         plt.figure()
         plt.xlabel(r'Czas [\si{\second}]')
         plt.ylabel(r'Przyspieszenie drgań [\si{\meter\per\second\squared}]')
-        plt.plot(t, acc[0:plot_N,i])
+        plt.plot(t, lowpass(acc[0:plot_N,i], 120, fs, zero_phase=True))
         plt.savefig('../artykul/plots/accel_' + axes[i] + ".pgf")
 
 def plot2():
@@ -67,7 +67,7 @@ def plot2():
         plt.bar(lin, filt, bar_width)
         plt.xticks(lin, frq_rng, rotation=70)
         plt.xlabel(r'Częstotliwości środkowe pasm [\si{\hertz}]')
-        plt.ylabel(r'Amplituda sygnału [\si{\meter\per\second\squared}]')
+        plt.ylabel(r'Wartość skuteczna sygnału [\si{\meter\per\second\squared}]')
         plt.savefig('../artykul/plots/ghost_' + axes[i] + ".pgf")
 
 
