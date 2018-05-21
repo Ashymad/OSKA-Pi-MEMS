@@ -6,6 +6,7 @@ pgf.preamble: \usepackage[utf8]{inputenc}, \usepackage[T1]{fontenc}, \usepackage
 pgf.rcfonts: False
 figure.figsize: 5, 3.5
 axes.grid: True
+savefig.dpi: 1200
 font.family: serif
 font.size: 10.0
 axes.unicode_minus: False

@@ -33,6 +33,7 @@ def rms(d): return np.sqrt(np.mean(np.square(d)))
 def gent(N, fs=800): return np.array(range(0,N,1))/fs
 
 
+extension = '.png'
 axes = ['x', 'y', 'z']
 
 
@@ -49,7 +50,7 @@ def plot1():
         plt.xlabel(r'Czas [\si{\second}]')
         plt.ylabel(r'Przyspieszenie drgań [\si{\meter\per\second\squared}]')
         plt.plot(t, lowpass(acc[0:plot_N,i], 120, fs, zero_phase=True))
-        plt.savefig('../artykul/plots/accel_' + axes[i] + ".pgf")
+        plt.savefig('../artykul/plots/accel_' + axes[i] + extension)
 
 def plot2():
     # Wyniki pomiaru w D-1 w postaci tercji
@@ -68,7 +69,7 @@ def plot2():
         plt.xticks(lin, frq_rng, rotation=70)
         plt.xlabel(r'Częstotliwości środkowe pasm [\si{\hertz}]')
         plt.ylabel(r'Wartość skuteczna sygnału [\si{\meter\per\second\squared}]')
-        plt.savefig('../artykul/plots/ghost_' + axes[i] + ".pgf")
+        plt.savefig('../artykul/plots/ghost_' + axes[i] + extension)
 
 
 def plot3():
@@ -86,7 +87,7 @@ def plot3():
     for i in range(0,3):
         plt.plot(t, acc2[plot_S:plot_E,i])
     plt.legend(["oś " + ax for ax in axes])
-    plt.savefig('../artykul/plots/accel_2_xyz.pgf')
+    plt.savefig('../artykul/plots/accel_2_xyz' + extension)
 
 def plot4():
     # Charakterystyka częstotliwościowa w osi Y
@@ -114,7 +115,7 @@ def plot4():
     plt.xticks(lin, frq, rotation=70)
     plt.xlabel(r'Częstotliwości badane [\si{\hertz}]')
     plt.ylabel(r'Niepewność graniczna [\si{\metre\per\square\second}]')
-    plt.savefig('../prez/plots/char.pgf')
+    plt.savefig('../prez/plots/char' + extension)
 
 def plot5():
     # Czułość
@@ -141,7 +142,7 @@ def plot5():
     plt.xlim(26.20, 28.20)
     plt.ylim(-0.1,0.1)
     plt.legend("PCB")
-    plt.savefig('../prez/plots/sens.pgf')
+    plt.savefig('../prez/plots/sens' + extension)
 
 def plot6():
     # Ulice
@@ -160,7 +161,7 @@ def plot6():
         plt.plot(t[it], data[it][:,2])
         plt.xlabel(r'Czas [\si{\second}]')
         plt.ylabel(r'Przyspieszenie drgań [\si{\meter\per\second\squared}]')
-        plt.savefig('../prez/plots/' + names[it] + '.pgf')
+        plt.savefig('../prez/plots/' + names[it] + extension)
 
 
     
