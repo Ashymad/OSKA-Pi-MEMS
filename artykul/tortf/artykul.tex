@@ -1,6 +1,6 @@
-\documentclass[a4paper,12pt]{mwart}
+\documentclass[english,a4paper,12pt]{article}
 
-\usepackage[english,polish]{babel}
+\usepackage[polish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{indentfirst}
@@ -89,6 +89,7 @@
 \begin{document}
 \onehalfspacing
 {\raggedright%
+  \noindent
   \textbf{Szymon \MakeUppercase{Mikulicz}} \\
   \textbf{Marcel \MakeUppercase{Piszak}} \\
   \vspace*{5pt}%
@@ -209,8 +210,8 @@ rozmiarów, pozwala na pomiar przyspieszenia drgań w trzech osiach jednocześni
 Posiada wbudowany, 14-bitowy przetwornik analogowo-cyfrowy oraz ma możliwość
 komunikacji z mikroprocesorem za pomocą interfejsu I\textsuperscript{2}C. Warto
 także zaznaczyć, że akcelerometr ten pozwala na wybór jednego z trzech
-dostępnych zakresów pomiarowych: $\pm$\SI{2}{\g}, $\pm$\SI{4}{\g} oraz
-$\pm$\SI{8}{\g}.  Częstotliwość próbkowania także może być zmieniana przez
+dostępnych zakresów pomiarowych: $\pm\SI{2}{\g}$, $\pm\SI{4}{\g}$ oraz
+$\pm\SI{8}{\g}$.  Częstotliwość próbkowania także może być zmieniana przez
 użytkownika, a jej największa wartość to \SI{800}{\hertz}. Akcelerometr posiada
 również wiele wbudowanych funkcji, między innymi filtr górnoprzepustowy.
 
@@ -224,7 +225,7 @@ było chwilowe zapisywanie pełnych przebiegów sygnałów drganiowych.
 
 \begin{figure}[!tbh]
   \centering
-  \includegraphics[width=0.8\textwidth]{bitgraphics/schemat.svg.png}
+  \includegraphics[width=0.8\textwidth]{bitgraphics/schemat_svg.png}
   \caption{Schemat stworzonego systemu pomiarowego}
   \label{fig:schemat}
 \end{figure}
@@ -454,5 +455,6 @@ wysyłać je na serwer sieciowy, gdzie będą one analizowane oraz przechowywane
 Dostęp do nich będzie możliwy przez aplikację hosta, która będzie umożliwiać
 przeglądanie danych aktualnych oraz analizę danych archiwalnych.
 
+\bibliographystyle{ieeetr}
 \bibliography{artykul}
 \end{document}
