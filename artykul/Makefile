@@ -18,7 +18,8 @@ pdf: artykul.m4.pdf
 odt: artykul.odt
 
 clean:
-	rm -f -- *.{tmp,4*,aux,blg,bcf,bbl,dvi,idv,lg,log,odt,out,run.xml,xref,toc,pdf} artykul.tex $(IMGOUT)
+	rm -f -- *.{tmp,4*,aux,blg,bcf,bbl,dvi,idv,lg,log,odt,out,run.xml,xref,toc,pdf}\
+	    artykul.tex $(IMGOUT) $(IMAGES:=.4og)
 
 artykul.m4.pdf: artykul.m4.aux  artykul.m4.bbl artykul.m4.tex
 	pdflatex artykul.m4.tex
