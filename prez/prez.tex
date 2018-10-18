@@ -10,6 +10,7 @@
 \usepackage[binary-units]{siunitx}
 \sisetup{output-decimal-marker = {,}}
 \usepackage{icomma}
+\usepackage{caption}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.15}
 \usepackage{csquotes}
@@ -54,10 +55,9 @@ backend=biber,
   \frame{\partpage}
 } 
 
-\title[Wibroakustyczna stacja pomiarowa]{%
-Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
-\author[S. Mikulicz, M. Piszak]{Szymon Mikulicz\\Marcel Piszak}
-\date{2018-05-10}
+\title[Rozproszony system monitorowania]{Rozproszony system monitorowania drgań oraz hałasu}
+\author[Mikulicz, Piszak i in.]{Szymon Mikulicz, Marcel Piszak\\Anna Warowny, Wioletta Gniady}
+\date{2018-10-20}
 \institute[AGH]{%
   Koło Naukowe Informatyki w Wibroakustyce\\
   ,,LabAcoustics''\\
@@ -137,25 +137,14 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
   %   \end{columns}
   % \end{frame}
   %%%%%%%%%%%%%%%%
-  \begin{frame}{Założenia projektowe}
-    \begin{itemize}
-      \item Pomiary zgodne z normą PN-B 02170:2016-12
-      \item Pasmo częstotliwości od \SI{0.5}{\hertz} do \SI{100}{\hertz}
-      \item Amplituda przyspieszenia drgań od
-	\SI{e-3}{\metre\per\square\second} do \SI{10}{\metre\per\square\second}
-      \item Możliwość zapisu w pamięci urządzenia zarejestrowanych wibrogramów
-      \item Możliwość zdalnego odczytu danych
-    \end{itemize}
-  \end{frame}
-  %%%%%%%%%%%%%%%%
   \section{Realizacja}
   \begin{frame}{Konstrukcja stacji pomiarowej}
     \begin{columns}
       \column{0.4\textwidth}
       \begin{itemize}
 	\item Raspberry Pi 3 model B
-	\item Moduł akcelerometru MEMS Adafruit MMA8451
 	\item Karta pamięci microSD 16GB
+	\item Czujniki MEMS
 	\item Kable połączeniowe
 	\item Zasilacz
       \end{itemize}
@@ -167,29 +156,46 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
     \end{columns}
   \end{frame}
   %%%%%%%%%%%%%%%%
-  \begin{frame}{Komunikacja z modułem i jego ustawienia}
+  \begin{frame}{Użyte czujniki}
     \begin{columns}
-      \column{0.4\textwidth}
+      \column{0.5\textwidth}
+      \textbf{Akcelerometr MEMS}
       \begin{itemize}
-	\item Protokół transmisji danych -- I\textsuperscript{2}C (SDA -- dane,
-	  SCL -- zegar)
-	\item Częstotliwość próbkowania -- \SI{800}{\hertz}
-  \item Zakres pomiarowy -- $\pm\SI{2}{\g}$
-  \item Rozdzielczość bitowa -- \SI{14}{\bit}
+	\item Adafruit MMA8451Q
+	\item Rozdzielczość bitowa -- \SI{14}{\bit}
+	\item Zakres dynamiczny -- $\SI{\pm 2}{\g}$
+	\item Częstotliwość próbkowania -- $\SI{400}{\hertz}$
       \end{itemize}
-      \column{0.59\textwidth}
-      \begin{figure}
-	\import{vecgraphics/}{schemat.pdf_tex}
-	\caption{Schemat stacji pomiarowej}
-      \end{figure}
+      \textbf{Mikrofon MEMS}
+      \begin{itemize}
+	\item Adafruit SPH0645LM4H
+	\item Rozdzielczość bitowa -- \SI{14}{\bit}
+	\item SNR -- $\SI{65}{\decibel}$
+	\item Zakres częstotliwości -- od \num{50} do \SI{15000}{\hertz}
+      \end{itemize}
+      \column{0.4\textwidth}
+      \centering
+      \includegraphics[width=0.5\textwidth,trim={0 3cm 0 3cm},clip]{bitgraphics/MMA8451.jpg}\\
+	\captionof{figure}{Adafruit MMA8451Q}
+	\includegraphics[width=0.5\textwidth,trim={0 3.9cm 0 4cm},clip]{bitgraphics/mikrofonMEMS.jpg}
+	\captionof{figure}{Adafruit SPH0645LM4H}
     \end{columns}
+  \end{frame}
+  %%%%%%%%%%%%%%%%
+  \begin{frame}{Komunikacja z modułem i jego ustawienia}
+    \begin{figure}
+      \centering
+      \import{vecgraphics/}{schemat2.pdf_tex}
+      \caption{Schemat stacji pomiarowej}
+    \end{figure}
   \end{frame}
   %%%%%%%%%%%%%%%%
   \begin{frame}{Opis programu sterującego}
     % \begin{columns}
     %   \column{0.59\textwidth}
       \begin{itemize}
-        \item Komunikacja z urządzeniem poprzez odczyt z i zapis do rejestrów
+        \item Komunikacja z akcelerometrem poprzez odczyt z i zapis do rejestrów
+	\item Komunikacja z mikrofonem przez protokół I\textsuperscript{2}S
         \item Wykorzystanie wewnętrznej kolejki FIFO akcelerometru (32 próbki w trzech osiach)
         \item Wysłanie sygnału przerwania w momencie zapełnienia połowy kolejki
         \item Akumulacja wyników z wybranego okresu w pliku HDF5, lub
@@ -242,12 +248,12 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
       \column{0.48\textwidth}
       \begin{figure}
         \includegraphics[width=\textwidth]{bitgraphics/stacja_2.png}
-        \caption{Wyznaczanie charakterystyki amplitudowo-częstotliwościowej}
+        \caption{Wyznaczanie charakterystyki akcelerometru}
       \end{figure}
       \column{0.48\textwidth}
       \begin{figure}
-        \includegraphics[width=\textwidth]{bitgraphics/stacja_1.png}
-        \caption{Pomiar kontrolny}
+        \includegraphics[width=\textwidth]{bitgraphics/komora.png}
+        \caption{Wyznaczanie charakterystyki mikrofonu}
       \end{figure}
     \end{columns}
   \end{frame}
@@ -259,9 +265,9 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
     \end{figure}
   \end{frame}
   %%%%%%%%%%%%%%%%
-  \begin{frame}{Wibrogram przejeżdżających tramwajów}
+  \begin{frame}{Charakterystyka amplitudowo-częstotliwościowa mikrofonu}
     \begin{figure}
-      \input{plots/ul_maj.pgf}
+      \includegraphics[width=0.9\textwidth,trim={0.15cm 0.15cm 0.15cm 1.5cm},clip]{bitgraphics/charmik.png}
     \end{figure}
   \end{frame}
   %%%%%%%%%%%%%%%%
@@ -277,18 +283,10 @@ Wibroakustyczna stacja pomiarowa oparta o mikrokomputer Raspberry Pi}
       \end{itemize}
       \column{0.4\textwidth}
       \begin{figure}
-        \includegraphics[width=0.8\textwidth]{bitgraphics/akcel.png}
+        \includegraphics[width=0.8\textwidth]{bitgraphics/fest.jpg}
         \caption{Akcelerometr w obudowie}
       \end{figure}
     \end{columns} 
-  \end{frame}
-  %%%%%%%%%%%%%%%%
-  \begin{frame}{Dalsze prace}
-    \begin{itemize}
-      \item Zastosowanie dokładniejszych akcelerometrów -- stworzenie własnego układu na bazie akcelerometru firmy Kionix oraz przetworników analogowo-cyfrowych firmy Texas Instruments
-      \item Rozszerzenie stacji o funkcjonalność pomiaru hałasu (mikrofony MEMS)
-      \item Połączenie wielu stacji pomiarowych w rozproszony system korzystający z technologii IoT
-    \end{itemize}
   \end{frame}
   %%%%%%%%%%%%%%%%
   \begin{frame}{Bibliografia}
